@@ -1,0 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
+//? import file scss:
+@import './partials/reset';
+@import './partials/typography';
+@import './partials/utilities';
+@import './partials/variables';
+@import './partials/extend';
+@import './partials/mixin';
+@import './components/header';
+@import './components/footer';
+@import './partials/common';
+

@@ -1,0 +1,93 @@
+/* --------------------------------
+         ?   COMMON
+-------------------------------- */
+
+//? immagine con overlay:
+main {
+    // overflow: auto;
+    width: 100vw;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),
+        url('../img/bg-body.jpg');
+    min-height: calc(100vh - 100px);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .ovlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+}
+
+
+// body {@include checkerboard(15px, $gray, $ligthGray)}
+
+
+/* ***********************************
+        * MODALE DELETE
+*********************************** */
+
+.no-scroll {overflow: hidden;}
+.screen.holdings {display: none;} //TODO: mettere il nella pagina <div class="screen holdings">
+.holdings {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: $footer, $alpha: .7);
+    z-index: 100;
+}
+
+.holding {display: none;}
+
+.modale__modale{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $table;
+    width: 500px;
+    border-radius: 15px;
+    padding: 35px;
+    text-align: center;
+    z-index: 200;
+    @extend %shadow;
+
+    span.modale__exit {
+        font-family: 'Ubuntu Condensed', sans-serif;
+        position: absolute;
+        right: 35px;
+        top: 35px;
+        font-size: 25px;
+        font-weight: 900;
+        color: $text3;
+        cursor: pointer;
+        &:hover {transform: scale(1.1);}
+    }
+    h4 {
+        font-size: 26px;
+        font-weight: 900;
+        color: $h_1;
+        margin-top: 60px;
+    }
+    form {text-align: center;}
+    input.delete {
+        display: inline-block;
+        margin-top: 25px;
+        border: none;
+        padding: 10px 40px;
+        border-radius: 15px;
+        background-color: $btn;
+        color: $text2;
+        @extend %shadow;
+        &:hover {background-color: $h_1; font-weight: 400;}
+
+    }
+
+} 
