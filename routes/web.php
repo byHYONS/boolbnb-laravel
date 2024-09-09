@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\DashboarController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\VisualController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,8 +31,27 @@ Route::middleware('auth', 'verified')
     ->group(function () {
 
     Route::get('/', [DashboarController::class, 'index'])->name('dashboard');
-    
-    
+
+    //? Recources HOME:
+    Route::resource('homes', HomeController::class)
+    //* chiamo la rotta con lo slug e non con l'id:
+    ->parameters(['homes' => 'home:slug']);
+
+    //? Recources SERVICE:
+    Route::resource('services', ServiceController::class);
+
+    //? Recources MESSAGE:
+    Route::resource('messages', MessageController::class);
+
+    //? Recources AD:
+    Route::resource('ads', AdController::class);
+
+    //? Recources VISUAL:
+    Route::resource('visuals', VisualController::class);
+
+    //? Recources USER:
+    Route::resource('users', RegisteredUserController::class);
+        
 });
 
 Route::middleware('auth')->group(function () {
