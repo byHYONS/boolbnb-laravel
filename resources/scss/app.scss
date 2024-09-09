@@ -5,12 +5,16 @@
 @import './partials/typography';
 @import './partials/utilities';
 @import './partials/variables';
-// @import './partials/extend';
-// @import './partials/mixin';
+@import './partials/extend';
+@import './partials/mixin';
 @import './shared/index';
 @import './shared/show';
 @import './shared/create';
 @import './components/header';
 @import './components/footer';
+@import './components/welcome';
+@import './pages/login';
+@import './pages/dashboard';
 @import './partials/common';
+
 

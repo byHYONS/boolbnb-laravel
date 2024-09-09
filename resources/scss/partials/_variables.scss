@@ -8,13 +8,18 @@ $secondary: #fff;
 $tertiary: #000;
 $footer: #00251c;
 
-$gradient: (background: linear-gradient(45deg, rgba(155,225,93,1) 25%, rgba(0,217,166,1) 100%));
+$gradient: linear-gradient(45deg, rgba(155,225,93,1) 25%, rgba(0,217,166,1) 100%);
 $no-gradient: #9be15d;
 
+//? elementi:
+$table: #fff;
+$btn: $gradient;
+
+
 //? titoli:
-$hl1: #00d9a6;
-$hl2: #fff;
-$hl3: #000;
+$h_1: #00d9a6;
+$h_2: #fff;
+$h_3: #000;
 
 
 //? testi:
