@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreign('home_id')
-                ->references('id')
-                ->on('homes')
-                ->nullOnDelete();
+            $table->foreignId('home_id')->constrained()->cascadeOnDelete();
 
             $table->string('name', 75);
             $table->string('email', 75);

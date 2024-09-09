@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('visuals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('home_id')->constrained()->nullOnDelete();
+            $table->foreignId('home_id')->constrained()->cascadeOnDelete();
 
             $table->string('ip', 20);
             $table->timestamps();
