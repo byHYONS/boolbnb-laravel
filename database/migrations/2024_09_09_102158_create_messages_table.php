@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('home_id')->constrained()->nullOnDelete();
+            $table->foreign('home_id')
+                ->references('id')
+                ->on('homes')
+                ->nullOnDelete();
 
             $table->string('name', 75);
             $table->string('email', 75);
@@ -31,3 +34,13 @@ return new class extends Migration
         Schema::dropIfExists('messages');
     }
 };
+
+
+
+Schema::create('project_technology', function (Blueprint $table) {
+    $table->id();
+
+    $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('technology_id')->constrained()->cascadeOnDelete();
+    $table->timestamps();
+});

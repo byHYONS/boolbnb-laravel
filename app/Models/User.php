@@ -44,4 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    //? relazione uno a molti con HOMES:
+    public function homes()
+    {
+        return $this->hasMany(Home::class);
+    }
 }

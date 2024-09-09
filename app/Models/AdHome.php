@@ -10,5 +10,7 @@ class AdHome extends Model
     use HasFactory;
 
     protected $table = 'ad_home';
-    
+
+
+
 }

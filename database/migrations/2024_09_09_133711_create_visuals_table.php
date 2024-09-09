@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('views', function (Blueprint $table) {
+        Schema::create('visuals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('home_id')->constrained()->nullOnDelete();
 
             $table->string('ip', 20);
-
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('views');
+        Schema::dropIfExists('visuals');
     }
 };

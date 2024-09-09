@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('homes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->nullOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 
             $table->string('title', 50)->unique();
             $table->string('slug', 55);
-            $table->testringxt('description', 250)->nullable();
+            $table->string('description', 250)->nullable();
 
             $table->unsignedTinyInteger('beds');
             $table->unsignedTinyInteger('bathrooms');

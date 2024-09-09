@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
+
+
+    //? relazione uno a molti con HOMES:
+    public function home()
+    {
+        return $this->belongsTo(Message::class);
+    }
 }
