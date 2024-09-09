@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdController;
-use App\Http\Controllers\Admin\DashboarController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -30,7 +30,7 @@ Route::middleware('auth', 'verified')
     ->prefix('admin')
     ->group(function () {
 
-    Route::get('/', [DashboarController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     //? Recources HOME:
     Route::resource('homes', HomeController::class)

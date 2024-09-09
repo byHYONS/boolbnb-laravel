@@ -7,6 +7,9 @@
 @import './partials/variables';
 // @import './partials/extend';
 // @import './partials/mixin';
+@import './shared/index';
+@import './shared/show';
+@import './shared/create';
 @import './components/header';
 @import './components/footer';
 @import './partials/common';
