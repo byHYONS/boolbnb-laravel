@@ -22,14 +22,18 @@ class HomeSeeder extends Seeder
         foreach ($apartments as $new_apartment) {
             $apartment = new Home();
 
+            $apartment->user_id = $new_apartment['id'];
             $apartment->title = $new_apartment['title'];
-            $apartment->slug = Str::of($new_apartment->title)->slug('-');
+            $apartment->slug = Str::of($new_apartment['title'])->slug('-');
             $apartment->description = $new_apartment['description'];
             $apartment->beds = $new_apartment['beds'];
             $apartment->bathrooms = $new_apartment['bathrooms'];
             $apartment->rooms = $new_apartment['rooms'];
             $apartment->square_metres = $new_apartment['mq'];
             $apartment->address = $new_apartment['address'];
+            $apartment->lat = "lat";
+            $apartment->long = "long";
+            $apartment->image = "image";
 
             $apartment->save();
         }
