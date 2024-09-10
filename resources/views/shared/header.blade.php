@@ -37,7 +37,7 @@
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.homes.index') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ route('admin.homes.index') }}">{{ __('Lista Case') }}</a>
                         </li>
                         @endauth
                     </ul>

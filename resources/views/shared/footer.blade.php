@@ -39,7 +39,7 @@
                         <a class="footer-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                     </li>
                     <li>
-                        <a class="footer-link" href="{{ route('admin.homes.index') }}">{{ __('Home') }}</a>
+                        <a class="footer-link" href="{{ route('admin.homes.index') }}">{{ __('Lista Case') }}</a>
                     </li>                 
                     @endauth
                 </ul>

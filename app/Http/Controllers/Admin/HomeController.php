@@ -66,11 +66,9 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Home $home)
     {
-        $apartment = Home::find($id);
-        $services = Service::all();
-        return view('admin.homes.show', compact('apartment', 'services'));
+        return view('admin.homes.show', compact('home'));
     }
 
     /**
