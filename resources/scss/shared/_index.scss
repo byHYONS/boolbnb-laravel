@@ -3,7 +3,15 @@
 *       AD & VISUAL & USER
 ?            INDEX
 -------------------------------- */
+.home-index {
 
-.img-container {
-    height: 200px;
+
+    .img-container {
+        height: 200px;
+
+        &:hover {
+            transform: scale(1.02);
+            transition: .45s;
+        }
+    }
 }
