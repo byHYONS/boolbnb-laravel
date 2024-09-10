@@ -14,7 +14,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Home::all();
+
+        return view('admin.homes.index', compact('apartments'));
     }
 
     /**
