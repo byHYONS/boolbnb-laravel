@@ -18,7 +18,7 @@
         border-radius: 15px;
         overflow: hidden;
         @extend %shadow;
-        
+
         .form-header {
             background: $gradient;
             color: $h_2;
@@ -26,12 +26,11 @@
             font-weight: 700;
             padding: 30px 45px 25px;
             margin-bottom: 20px;
-            
         }
-        
+
         .form-body {
             padding: 15px 45px 45px;
-            
+
             .form-check-input:focus,
             .form-control:focus {
                 border-color: $no-gradient;
@@ -40,7 +39,6 @@
             input {
                 border: 1px solid $btn;
             }
-            
 
             .button {
                 margin-top: 10px;
@@ -51,19 +49,30 @@
                 border: none;
                 color: $text2;
                 @extend %shadow;
-                &:hover {opacity:  .85;  @extend %shadow2;}
+                &:hover {
+                    opacity: 0.85;
+                    @extend %shadow2;
+                }
             }
 
             .link {
                 color: $no-gradient;
-                &:hover {font-weight: 700;}
+                &:hover {
+                    font-weight: 700;
+                }
             }
             a.link {
                 margin-left: 10px;
                 color: $text1;
-                &:hover {color: $h_1; font-weight: 500;}
+                &:hover {
+                    color: $h_1;
+                    font-weight: 500;
+                }
             }
-
         }
     }
+}
+.register {
+    height: fit-content;
+    padding-bottom: 30px;
 }
