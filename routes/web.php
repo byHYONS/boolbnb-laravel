@@ -40,18 +40,12 @@ Route::middleware('auth', 'verified')
     //? Recources SERVICE:
     Route::resource('services', ServiceController::class);
 
-    //? Recources MESSAGE:
-    Route::resource('messages', MessageController::class);
-
     //? Recources AD:
     Route::resource('ads', AdController::class);
 
-    //? Recources VISUAL:
-    Route::resource('visuals', VisualController::class);
-
     //? Recources USER:
     Route::resource('users', RegisteredUserController::class);
-        
+       
 });
 
 Route::middleware('auth')->group(function () {

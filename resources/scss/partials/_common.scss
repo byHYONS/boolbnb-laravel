@@ -1,10 +1,13 @@
 /* --------------------------------
          ?   COMMON
 -------------------------------- */
+body {
+    height: 100vh;
+}
 main {
         // overflow: auto;
         width: 100vw;
-        min-height: calc(100vh - 450px);
+        min-height: calc(100% - 100px);
 
         // background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('../img/bg-body.jpg');
         // background-attachment: fixed;
