@@ -7,6 +7,7 @@ use App\Http\Requests\StoreHomeRequest;
 use App\Http\Requests\UpdateHomeRequest;
 use App\Models\Home;
 use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -37,19 +38,22 @@ class HomeController extends Controller
     public function store(StoreHomeRequest $request)
     {
         $data = $request->validated();
-        $data['slug'] = Str::of($data['title'])->slug();
 
         $img_path = $request->file('image')->store('uploads');
 
         $apartment = new Home();
         $apartment->title = $data['title'];
+        $apartment->slug = Str::of($data['title'])->slug();
         $apartment->description = $data['description'];
         $apartment->beds = $data['beds'];
         $apartment->bathrooms = $data['bathrooms'];
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
+        $apartment->lat = "lat";
+        $apartment->long = "long";
         $apartment->active = $data['active'];
+        $apartment->user_id = Auth::user()->id;
         $apartment->image = $img_path;
 
         $apartment->save();
@@ -84,18 +88,21 @@ class HomeController extends Controller
     public function update(UpdateHomeRequest $request, Home $apartment)
     {
         $data = $request->validated();
-        $data['slug'] = Str::of($data['title'])->slug();
 
         $img_path = $request->file('image')->store('uploads');
 
         $apartment->title = $data['title'];
+        $apartment->slug = Str::of($data['title'])->slug();
         $apartment->description = $data['description'];
         $apartment->beds = $data['beds'];
         $apartment->bathrooms = $data['bathrooms'];
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
+        $apartment->lat = "lat";
+        $apartment->long = "long";
         $apartment->active = $data['active'];
+        $apartment->user_id = Auth::user()->id;
         $apartment->image = $img_path;
 
         $apartment->update($data);

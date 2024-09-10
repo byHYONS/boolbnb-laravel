@@ -140,7 +140,12 @@
             @endif
         </div>
 
-        <button type="button" class="btn btn-outline-secondary">Affitta</button>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" name="active" id="active" value="1">
+            <label class="form-check-label" for="active"> Visibile </label>
+        </div>
+
+        <button class="btn btn-outline-secondary">Affitta</button>
     </form>
 </div>
 @endsection
