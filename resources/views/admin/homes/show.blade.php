@@ -3,7 +3,7 @@
     
     @section('content')
     
-    <div class="project-show p-5">
+    <div class="home-show p-5">
         <div class="container">
             <div class="button-manage">
                 {{--? bottone indietro --}}
@@ -44,6 +44,9 @@
                     <div class="text">
                         <ul>
                             <li class="mb-3">
+                                <span>Indirizzo: </span>{{$home->address}}
+                            </li>
+                            <li class="mb-3">
                                 <span>Numero Stanze: </span>{{$home->rooms}}
                             </li>
                             <li class="mb-3">
@@ -54,13 +57,12 @@
                             </li>
                             <li class="mb-3">
                                 <span>Servizi: </span>
-                                {{$home->services}}
                                 @forelse ($home->services as $service)
-                                {{ $service->name }}
+                                {{ $service->name }} {{ !$loop->last ? ',' : '' }}
                                 @empty
                                 Nessuna servizio selezionato
+                                @endforelse
                             </li>
-                            @endforelse
                         
                         </ul>
                     </div>

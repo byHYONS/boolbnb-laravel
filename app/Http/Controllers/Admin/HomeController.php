@@ -68,6 +68,7 @@ class HomeController extends Controller
      */
     public function show(Home $home)
     {
+        $home->load('services');
         return view('admin.homes.show', compact('home'));
     }
 
