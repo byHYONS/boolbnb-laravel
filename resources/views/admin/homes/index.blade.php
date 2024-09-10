@@ -2,32 +2,21 @@
 
 @section('content')
 
-<h2 class="m-3">Lista appartamenti</h2>
-
-<ul>
-    @foreach ($apartments as $apartment)
-    <li class="m-2">
-        <div class="w-75">
-            <div class="d-flex justify-content-between align-items-center mb-1 mt-3">
-                <div>
-                    <a href="{{route('admin.homes.show', $apartment)}}">
-                        <span class="title"><strong>{{$apartment['title']}}</strong></span>
-                    </a>
+<div class="container">
+    <h3 class="my-3">Lista appartamenti</h3>
+    <div class="row">
+        <ul class="d-flex flex-wrap">
+            @foreach ($apartments as $apartment)
+            <li class="col-3">
+                <div class="mx-2 my-3">
+                    <div class="img-container">
+                        <img src="{{$apartment['image']}}" alt="img" class="rounded">
+                    </div>
+                    <p class="title"><strong>{{$apartment['title']}}</strong></p>
                 </div>
-                <div class="d-flex">
-                    <a href="{{route('admin.homes.edit', $apartment)}}">
-                        <button class="btn btn-outline-primary ms-4">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                    </a>
-                    <button class="btn btn-outline-danger ms-3 delete-button">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-            <hr>
-        </div>
-    </li>
-    @endforeach
-</ul>
+            </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
 @endsection
