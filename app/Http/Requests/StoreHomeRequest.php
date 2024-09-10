@@ -30,6 +30,7 @@ class StoreHomeRequest extends FormRequest
             'square_metres' => 'required|integer|min:10',
             'address' => 'required|string|min:10|max:75',
             'image' => 'required|image|max:2048',
+            'active' => 'required',
             'services' => 'nullable|exists:services,id'
         ];
     }
@@ -60,6 +61,7 @@ class StoreHomeRequest extends FormRequest
             'image.required' => 'L\'immagine è obbligatoria',
             'image.image' => 'Il file deve essere un\'immagine',
             'image.max' => 'Il file può essere al massimo di 2048 KB',
+            'active.required' => 'Vuoi mostrare il tuo appartamento?',
             'services.exists' => 'I servizi selezionati non sono validi'
         ];
     }
