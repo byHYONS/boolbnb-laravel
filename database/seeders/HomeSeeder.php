@@ -17,6 +17,8 @@ class HomeSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
+        Home::truncate();
+
         $apartments = config('apartments');
 
         foreach ($apartments as $new_apartment) {
@@ -31,9 +33,9 @@ class HomeSeeder extends Seeder
             $apartment->rooms = $new_apartment['rooms'];
             $apartment->square_metres = $new_apartment['mq'];
             $apartment->address = $new_apartment['address'];
+            $apartment->image = $new_apartment['image'];
             $apartment->lat = "lat";
             $apartment->long = "long";
-            $apartment->image = "image";
 
             $apartment->save();
         }
