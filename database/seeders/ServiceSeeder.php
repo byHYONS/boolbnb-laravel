@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class ServiceSeeder extends Seeder
 {
@@ -12,6 +14,19 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Schema::disableForeignKeyConstraints();
+
+        $service = config('service');
+
+        foreach ($service as $new_service) {
+            $service = new Service();
+
+            $service->name = $new_service['name'];
+            $service->icon = $new_service['icon'];
+            
+            $service->save();
+        }
+
+        Schema::enableForeignKeyConstraints();
     }
 }
