@@ -7,6 +7,7 @@ use App\Http\Requests\StoreHomeRequest;
 use App\Http\Requests\UpdateHomeRequest;
 use App\Models\Home;
 use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -37,7 +38,9 @@ class HomeController extends Controller
     {
         $data = $request->validated();
         $data['slug'] = Str::of($data['title'])->slug();
-    
+
+        $img_path = $request->file('image')->store('uploads');
+
         $apartment = new Home();
         $apartment->title = $data['title'];
         $apartment->description = $data['description'];
@@ -46,7 +49,7 @@ class HomeController extends Controller
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
-        $apartment->image = $data['image'];
+        $apartment->image = $img_path;
 
         $apartment->save();
         if ($request->has('services')) {
@@ -82,6 +85,7 @@ class HomeController extends Controller
         $data = $request->validated();
         $data['slug'] = Str::of($data['title'])->slug();
 
+        $img_path = $request->file('image')->store('uploads');
 
         $apartment->title = $data['title'];
         $apartment->description = $data['description'];
@@ -90,17 +94,16 @@ class HomeController extends Controller
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
-        $apartment->image = $data['image'];
-        
+        $apartment->image = $img_path;
+
         $apartment->update($data);
 
         $apartment->save();
 
-        if($request->has('services')) {
+        if ($request->has('services')) {
 
             $apartment->services()->sync($request->services);
-        }
-        else {
+        } else {
             $apartment->services()->detach();
         }
         return redirect()->route('admin.homes.index');
@@ -110,8 +113,13 @@ class HomeController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Home $apartment)
-    { 
+    {
         $apartment->services()->detach();
+
+        if ($apartment->image) {
+            Storage::delete($apartment->image);
+        }
+
         $apartment->delete();
         return redirect()->route('admin.home.index');
     }
