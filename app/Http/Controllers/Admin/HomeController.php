@@ -49,6 +49,7 @@ class HomeController extends Controller
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
+        $apartment->active = $data['active'];
         $apartment->image = $img_path;
 
         $apartment->save();
@@ -94,6 +95,7 @@ class HomeController extends Controller
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
+        $apartment->active = $data['active'];
         $apartment->image = $img_path;
 
         $apartment->update($data);
