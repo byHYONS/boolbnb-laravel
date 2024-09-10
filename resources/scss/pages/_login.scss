@@ -8,7 +8,8 @@
 .reset,
 .verify,
 .forgot {
-    height: calc(100vh - 100px);
+    height: fit-content;
+    padding: 35px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,8 +72,4 @@
             }
         }
     }
-}
-.register {
-    height: fit-content;
-    padding-bottom: 30px;
 }
