@@ -50,7 +50,7 @@
                                 <span>Numero Stanze: </span>{{$home->rooms}}
                             </li>
                             <li class="mb-3">
-                                <span>Nomero Bagni: </span>{{$home->bathrooms}}
+                                <span>Numero Bagni: </span>{{$home->bathrooms}}
                             </li>
                             <li class="mb-3">
                                 <span>Superficie: </span>{{$home->square_metres}} mq
