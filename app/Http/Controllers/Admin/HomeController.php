@@ -49,8 +49,8 @@ class HomeController extends Controller
         $apartment->image = $data['image'];
 
         $apartment->save();
-        if ($request->has('service')) {
-            $apartment->service()->attach($request->service);
+        if ($request->has('services')) {
+            $apartment->services()->attach($request->service);
         }
         return redirect()->route('admin.homes.index')->with('message', 'creazione avvenuta con successo');
     }
@@ -103,14 +103,15 @@ class HomeController extends Controller
         else {
             $apartment->services()->detach();
         }
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.homes.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Home $apartment)
-    {
+    { 
+        $apartment->services()->detach();
         $apartment->delete();
         return redirect()->route('admin.home.index');
     }
