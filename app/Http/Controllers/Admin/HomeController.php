@@ -79,7 +79,7 @@ class HomeController extends Controller
     public function edit(Home $home)
     {
         $services = Service::all();
-        return view('admin.homes.edit', compact('services'));
+        return view('admin.homes.edit', compact('home','services'));
     }
 
     /**
