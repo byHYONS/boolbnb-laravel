@@ -22,7 +22,7 @@ class StoreHomeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:5|max:50|string',
+            'title' => 'required|min:5|max:50|string|unique:homes',
             'description' => 'nullable|min:10|max:250|string',
             'beds' => 'required|integer',
             'bathrooms' => 'required|integer',
@@ -42,6 +42,7 @@ class StoreHomeRequest extends FormRequest
             'title.min' => 'Il titolo deve contenere almeno 5 caratteri',
             'title.max' => 'Il titolo può contenere al massimo 50 caratteri',
             'title.string' => 'Il titolo deve essere una stringa',
+            'title.unique' => 'Hai già un appartamento con questo nome',
             'description.min' => 'La descrizione deve contenere almeno 10 caratteri',
             'description.max' => 'La descrizione può contenere al massimo 250 caratteri',
             'description.string' => 'La descrizione deve essere una stringa',
