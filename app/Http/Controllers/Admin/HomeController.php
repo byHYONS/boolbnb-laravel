@@ -78,41 +78,41 @@ class HomeController extends Controller
     public function edit(Home $home)
     {
         $services = Service::all();
-        return view('admin.homes.edit', compact('home','services'));
+        return view('admin.homes.edit', compact('home', 'services'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHomeRequest $request, Home $apartment)
+    public function update(UpdateHomeRequest $request, Home $home)
     {
         $data = $request->validated();
 
-        $img_path = $request->file('image')->store('uploads');
+        if ($request->hasFile('image')) {
+            $img_path = $request->file('image')->store('uploads');
+            $home->image = $img_path;
+        }
 
-        $apartment->title = $data['title'];
-        $apartment->slug = Str::of($data['title'])->slug();
-        $apartment->description = $data['description'];
-        $apartment->beds = $data['beds'];
-        $apartment->bathrooms = $data['bathrooms'];
-        $apartment->rooms = $data['rooms'];
-        $apartment->square_metres = $data['square_metres'];
-        $apartment->address = $data['address'];
-        $apartment->lat = "lat";
-        $apartment->long = "long";
-        $apartment->active = $data['active'];
-        $apartment->user_id = Auth::user()->id;
-        $apartment->image = $img_path;
+        $home->title = $data['title'];
+        $home->slug = Str::of($data['title'])->slug();
+        $home->description = $data['description'];
+        $home->beds = $data['beds'];
+        $home->bathrooms = $data['bathrooms'];
+        $home->rooms = $data['rooms'];
+        $home->square_metres = $data['square_metres'];
+        $home->address = $data['address'];
+        $home->lat = "lat";
+        $home->long = "long";
+        $home->active = $data['active'];
+        $home->user_id = Auth::user()->id;
 
-        $apartment->update($data);
-
-        $apartment->save();
+        $home->save();
 
         if ($request->has('services')) {
 
-            $apartment->services()->sync($request->services);
+            $home->services()->sync($request->services);
         } else {
-            $apartment->services()->detach();
+            $home->services()->detach();
         }
         return redirect()->route('admin.homes.index');
     }
