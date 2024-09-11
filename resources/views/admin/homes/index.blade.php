@@ -4,6 +4,11 @@
 <div class="home-index">
     <div class="container">
         <h3 class="my-3">Lista appartamenti</h3>
+        <div class="manage">
+            <div class="create my-3">
+                <a href="{{route('admin.homes.create') }}">{{ __('Crea Nuovo')}}</a>
+            </div>
+        </div>
         <div class="row">
             <ul class="d-flex flex-wrap">
                 @foreach ($homes as $apartment)

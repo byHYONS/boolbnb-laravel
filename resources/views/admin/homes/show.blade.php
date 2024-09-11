@@ -19,9 +19,11 @@
                     <a href="{{route('admin.homes.edit', $home)}}" class="ml-45 mr-10">
                         <i class="fas fa-pen"></i>
                     </a>
-                    <a href="#" class="modale">
-                        <i class="fas fa-trash"></i>
-                    </a>
+                    <form action="{{route('admin.homes.destroy', $home)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="border-0 bg-transparent"><a href=""><i class="fas fa-trash"></i></a></button>
+                    </form>
     
                 </div>
             </div>

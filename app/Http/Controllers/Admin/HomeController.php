@@ -155,15 +155,16 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Home $apartment)
+    public function destroy(Home $home)
     {
-        $apartment->services()->detach();
+        $home->services()->detach();
 
-        if ($apartment->image) {
-            Storage::delete($apartment->image);
+        if ($home->image) {
+            Storage::delete($home->image);
         }
 
-        $apartment->delete();
-        return redirect()->route('admin.home.index');
+        $home->delete();
+        
+        return redirect()->route('admin.homes.index');
     }
 }

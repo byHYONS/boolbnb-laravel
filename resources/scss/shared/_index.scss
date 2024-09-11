@@ -5,6 +5,19 @@
 -------------------------------- */
 .home-index {
 
+    .manage{
+
+        a {
+            padding: 8px 20px;
+            border-radius: 12px;
+            background: $gradient;
+            color: $text2;
+            @extend %shadow;      
+            &:hover {opacity: .9; @extend %shadow2;}
+    
+        }
+    }
+
 
     .img-container {
         height: 200px;
