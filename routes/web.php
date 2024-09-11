@@ -47,17 +47,15 @@ Route::middleware('auth', 'verified')
 
     //? Recources USER:
     Route::resource('users', RegisteredUserController::class);
-
-
-
-    
+ 
        
 });
 
 
-//? rotta tomtom:
+//? rotta per chiamata API tomtom:
 Route::get('/get-coordinates', [GeocodingController::class, 'getCoordinates'])
-  ->name('get.coordinates');
+    ->name('get.coordinates');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

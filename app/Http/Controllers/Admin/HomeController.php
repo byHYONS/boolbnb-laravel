@@ -16,12 +16,11 @@ class HomeController extends Controller
 
     protected $geocodingController;
 
-    // Inietta il GeocodingController nel costruttore
+    //? Costruttore per GeocodingController:
     public function __construct(GeocodingController $geocodingController)
     {
         $this->geocodingController = $geocodingController;
     }
-
 
 
     /**
@@ -51,18 +50,18 @@ class HomeController extends Controller
         $data = $request->validated();
 
 
-        // Prendi l'indirizzo dal form
+        //? Indirizzo per le coordinate:
         $address = $data['address'];
 
-        // Richiama il metodo dal GeocodingController per ottenere le coordinate
+        //? Richiamiamo il metodo dal GeocodingController:
         $coordinates = $this->geocodingController->getCoordinates($address);
 
         if (isset($coordinates['error'])) {
-            // Se c'è un errore, reindirizza l'utente con il messaggio di errore
+            //? Gestiamo l'errore, reindirizziamo l'utente con il messaggio di errore:
             return redirect()->back()->withErrors(['address' => $coordinates['error']]);
         }
 
-        // Prendi latitudine e longitudine
+        //? Risultato della chiamata API:
         $latitude = $coordinates['lat'];
         $longitude = $coordinates['lon'];
 
@@ -120,6 +119,24 @@ class HomeController extends Controller
     {
         $data = $request->validated();
 
+        //? Indirizzo per le coordinate:
+        $address = $data['address'];
+
+        //? verifichiama se l'indirizzo è stato modificato:
+        if ($address !== $home->address) {
+            //? Richiamiamo il metodo dal GeocodingController:
+            $coordinates = $this->geocodingController->getCoordinates($address);
+
+            //? Gestiamo l'errore, reindirizziamo l'utente con il messaggio di errore:
+            if (isset($coordinates['error'])) {
+                return redirect()->back()->withErrors(['address' => $coordinates['error']]);
+            }
+
+            //? risultato della chiamata API:
+            $latitude = $coordinates['lat'];
+            $longitude = $coordinates['lon'];
+        }
+
         // Subir imagen solo si el usuario ha subido una nueva
         if ($request->hasFile('image')) {
             $img_path = $request->file('image')->store('uploads');
@@ -134,8 +151,8 @@ class HomeController extends Controller
         $home->rooms = $data['rooms'];
         $home->square_metres = $data['square_metres'];
         $home->address = $data['address'];
-        $home->lat = "lat";
-        $home->long = "long";
+        $home->lat = $latitude;
+        $home->long = $longitude;
         $home->active = $data['active'];
         $home->user_id = Auth::user()->id;
 
@@ -164,7 +181,7 @@ class HomeController extends Controller
         }
 
         $home->delete();
-        
+
         return redirect()->route('admin.homes.index');
     }
 }

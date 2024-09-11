@@ -7,27 +7,28 @@ use Illuminate\Support\Facades\Http;
 
 class GeocodingController extends Controller
 {
-    // Cambia il tipo di parametro in una stringa, dato che stai passando un indirizzo
+    //? passiamo il dato come stringa:
     public function getCoordinates(string $address)
     {
         if (!$address) {
             return ['error' => 'Indirizzo non fornito'];
         }
 
-        // Costruisci l'URL per chiamare l'API TomTom
+        //? Costruiamo l'URL per chiamare l'API TomTom:
         $apiKey = env('TOMTOM_API_KEY');
         $url = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json";
 
-        // Fai la richiesta API
+        //? richiesta API:
         $response = Http::get($url, ['key' => $apiKey]);
 
-        // Gestisci la risposta
+        //? gestiamo la rispasta:
         if ($response->successful()) {
             $data = $response->json();
 
-            // Se ci sono coordinate, restituiscile
+            //? se c'è una risposta positiva restituisce un risultao:
             if (isset($data['results'][0]['position'])) {
-                return $data['results'][0]['position']; // latitudine e longitudine
+                //? risultato -> latitudine e longitudine:
+                return $data['results'][0]['position'];
             } else {
                 return ['error' => 'Coordinate non trovate'];
             }
@@ -36,3 +37,4 @@ class GeocodingController extends Controller
         return ['error' => 'Errore nella chiamata API'];
     }
 }
+
