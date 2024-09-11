@@ -60,6 +60,7 @@ class HomeController extends Controller
         if ($request->has('services')) {
             $apartment->services()->attach($request->service);
         }
+
         return redirect()->route('admin.homes.index')->with('message', 'creazione avvenuta con successo');
     }
 
@@ -88,9 +89,10 @@ class HomeController extends Controller
     {
         $data = $request->validated();
 
+        // Subir imagen solo si el usuario ha subido una nueva
         if ($request->hasFile('image')) {
             $img_path = $request->file('image')->store('uploads');
-            $home->image = $img_path;
+            $home->image = $img_path; // Asignar la nueva imagen
         }
 
         $home->title = $data['title'];
@@ -114,6 +116,8 @@ class HomeController extends Controller
         } else {
             $home->services()->detach();
         }
+
+        $home->save();
         return redirect()->route('admin.homes.index');
     }
 
