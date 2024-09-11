@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\GeocodingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,8 +47,17 @@ Route::middleware('auth', 'verified')
 
     //? Recources USER:
     Route::resource('users', RegisteredUserController::class);
+
+
+
+    
        
 });
+
+
+//? rotta tomtom:
+Route::get('/get-coordinates', [GeocodingController::class, 'getCoordinates'])
+  ->name('get.coordinates');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

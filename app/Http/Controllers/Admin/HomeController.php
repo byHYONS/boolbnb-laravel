@@ -13,6 +13,17 @@ use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
+
+    protected $geocodingController;
+
+    // Inietta il GeocodingController nel costruttore
+    public function __construct(GeocodingController $geocodingController)
+    {
+        $this->geocodingController = $geocodingController;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -39,6 +50,24 @@ class HomeController extends Controller
     {
         $data = $request->validated();
 
+
+        // Prendi l'indirizzo dal form
+        $address = $data['address'];
+
+        // Richiama il metodo dal GeocodingController per ottenere le coordinate
+        $coordinates = $this->geocodingController->getCoordinates($address);
+
+        if (isset($coordinates['error'])) {
+            // Se c'è un errore, reindirizza l'utente con il messaggio di errore
+            return redirect()->back()->withErrors(['address' => $coordinates['error']]);
+        }
+
+        // Prendi latitudine e longitudine
+        $latitude = $coordinates['lat'];
+        $longitude = $coordinates['lon'];
+
+
+
         $img_path = $request->file('image')->store('uploads');
 
         $apartment = new Home();
@@ -50,11 +79,13 @@ class HomeController extends Controller
         $apartment->rooms = $data['rooms'];
         $apartment->square_metres = $data['square_metres'];
         $apartment->address = $data['address'];
-        $apartment->lat = "lat";
-        $apartment->long = "long";
+        $apartment->lat = $latitude;
+        $apartment->long = $longitude;
         $apartment->active = $data['active'];
         $apartment->user_id = Auth::user()->id;
         $apartment->image = $img_path;
+
+
 
         $apartment->save();
         if ($request->has('services')) {
