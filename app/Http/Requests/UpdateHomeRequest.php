@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateHomeRequest extends FormRequest
 {
@@ -22,7 +23,13 @@ class UpdateHomeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:5|max:50|string',
+            'title' => [
+                'required',
+                'string',
+                'min:5',
+                'max:50',
+                Rule::unique('homes', 'title')->ignore($this->home),
+            ],
             'description' => 'nullable|min:10|max:250|string',
             'beds' => 'required|integer',
             'bathrooms' => 'required|integer',
