@@ -28,7 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $homes = Home::all();
+
+        // $homes = Home::all();
+        $userId = Auth::user()->id;
+
+        $homes = Home::where('user_id', $userId)->get();
 
         return view('admin.homes.index', compact('homes'));
     }
