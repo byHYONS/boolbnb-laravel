@@ -52,6 +52,9 @@
                                 <span>Numero Stanze: </span>{{$home->rooms}}
                             </li>
                             <li class="mb-3">
+                                <span>Numero Letti: </span>{{$home->beds}}
+                            </li>
+                            <li class="mb-3">
                                 <span>Numero Bagni: </span>{{$home->bathrooms}}
                             </li>
                             <li class="mb-3">
