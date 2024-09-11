@@ -36,7 +36,7 @@ class UpdateHomeRequest extends FormRequest
             'rooms' => 'required|integer',
             'square_metres' => 'required|integer|min:10',
             'address' => 'required|string|min:10|max:75',
-            'image' => 'required|image|max:2048',
+            'image' => 'image|max:2048',
             'active' => 'required',
             'services' => 'nullable|exists:services,id'
         ];

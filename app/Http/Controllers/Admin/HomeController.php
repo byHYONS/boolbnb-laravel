@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+
+
 class HomeController extends Controller
 {
 
@@ -124,6 +126,13 @@ class HomeController extends Controller
     {
         $data = $request->validated();
 
+        //? per non sovrascrivere l'immagine in caso non venga caricata un'altra immagine:
+        if ($request->hasFile('image')) {
+
+            $img_path = Storage::put('upload', $request->file('image'));
+            $data['image'] = $img_path;
+        }
+
         //? Indirizzo per le coordinate:
         $address = $data['address'];
 
@@ -145,11 +154,6 @@ class HomeController extends Controller
             $longitude = $home->long;
         }
 
-        // Subir imagen solo si el usuario ha subido una nueva
-        if ($request->hasFile('image')) {
-            $img_path = $request->file('image')->store('uploads');
-            $home->image = $img_path; // Asignar la nueva imagen
-        }
 
         $home->title = $data['title'];
         $home->slug = Str::of($data['title'])->slug();
