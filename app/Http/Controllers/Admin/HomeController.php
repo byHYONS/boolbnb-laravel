@@ -84,11 +84,12 @@ class HomeController extends Controller
         $apartment->user_id = Auth::user()->id;
         $apartment->image = $img_path;
 
-
-
         $apartment->save();
         if ($request->has('services')) {
-            $apartment->services()->attach($request->service);
+
+            $apartment->services()->sync($request->services);
+        } else {
+            $apartment->services()->detach();
         }
 
         return redirect()->route('admin.homes.index')->with('message', 'creazione avvenuta con successo');
