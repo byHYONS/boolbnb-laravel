@@ -2,7 +2,17 @@
 
 @section('content')
 <div class="container">
-    <h2 class="m-3">Affitta un appartamento</h2>
+    
+        <h2 class="m-3">Affitta un appartamento</h2>
+        
+        <div class="button-manage">
+                {{--? bottone indietro --}}
+                <div class="back">
+                    <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>              
+                </div>
+        <!-- <a href="{{route('admin.homes.index') }}"><button class="back">torna alla home</button></a> -->
+
+    
 
     <form action="{{route('admin.homes.store')}}" method="POST" enctype="multipart/form-data" class="m-3">
         @csrf

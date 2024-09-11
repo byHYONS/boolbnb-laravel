@@ -4,8 +4,13 @@
 
 <div class="container mt-5">
     <h1>Aggiornamento dell'appartamento</h1>
+    <div class="button-manage my-3">
+                {{--? bottone indietro --}}
+                <div class="back">
+                    <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>              
+                </div>
     <!-- Formulario di edizione -->
-    <form action="{{ route('admin.homes.update', $home) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.homes.update', $home) }}" method="POST" enctype="multipart/form-data" class="mt-3">
         @method('PUT')
         @csrf
 
