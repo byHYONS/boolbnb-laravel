@@ -16,6 +16,8 @@ class ServiceSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
+        Service::truncate();
+
         $service = config('service');
 
         foreach ($service as $new_service) {
