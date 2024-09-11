@@ -19,7 +19,9 @@ class GeocodingController extends Controller
         $url = "https://api.tomtom.com/search/2/geocode/" . urlencode($address) . ".json";
 
         //? richiesta API:
-        $response = Http::get($url, ['key' => $apiKey]);
+        $response = Http::withOptions([
+            'verify' => false, // Disabilita la verifica del certificato SSL
+        ])->get($url, ['key' => $apiKey]);
 
         //? gestiamo la rispasta:
         if ($response->successful()) {
