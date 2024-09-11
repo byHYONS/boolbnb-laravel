@@ -140,6 +140,9 @@ class HomeController extends Controller
             //? risultato della chiamata API:
             $latitude = $coordinates['lat'];
             $longitude = $coordinates['lon'];
+        } else {
+            $latitude = $home->lat;
+            $longitude = $home->long;
         }
 
         // Subir imagen solo si el usuario ha subido una nueva
