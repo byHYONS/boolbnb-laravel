@@ -3,10 +3,12 @@
 @section('content')
 <div class="home-index">
     <div class="container">
-        <h3 class="my-3">Lista appartamenti</h3>
-        <div class="manage">
-            <div class="create my-3">
-                <a href="{{route('admin.homes.create') }}">{{ __('Crea Nuovo')}}</a>
+        <div class="d-flex justify-content-between align-items-center mx-2">
+            <h2 class="my-4">Lista appartamenti</h2>
+            <div class="manage">
+                <div class="create my-4">
+                    <a href="{{route('admin.homes.create') }}">{{ __('Crea Nuovo')}}</a>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -19,10 +21,10 @@
                             <div class="img-container">
                                 @if (Str::startsWith($apartment->image, 'http'))
                                 {{--? immagine da url --}}
-                                    <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}" class="rounded">
+                                <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}" class="rounded">
                                 @else
                                 {{--? immagine da storage --}}
-                                    <img src="{{ asset('storage/' . $apartment->image) }}" alt="{{ $apartment->title }}" class="rounded">
+                                <img src="{{ asset('storage/' . $apartment->image) }}" alt="{{ $apartment->title }}" class="rounded">
                                 @endif
                             </div>
                         </a>

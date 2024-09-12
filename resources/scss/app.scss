@@ -19,7 +19,7 @@
 
 
 // button aggiornamento
-.effect{
+.effect {
     background-color: transparent;
     color: $primary;
     padding: 13px 36px;
@@ -30,11 +30,12 @@
     overflow: hidden;
     transition: color 0.8s;
 }
-.effect:hover{
-    color:white
+
+.effect:hover {
+    color: white
 }
 
-.effect:before{
+.effect:before {
     content: "";
     position: absolute;
     top: 100%;
@@ -47,13 +48,13 @@
     transition: all 0.6s ease;
 }
 
-.effect:hover::before{
+.effect:hover::before {
     top: -50%;
     left: -9%;
 }
 
 
-
+/*
 // inputs_edit
 .formcontainer {
     height: 100%;
@@ -87,7 +88,7 @@
     z-index: 5;
 }
 
-.formcontainer>input:focus, 
+.formcontainer>input:focus,
 .formcontainer>textarea:focus {
     color: black;
     outline: none;
@@ -109,15 +110,22 @@
 .formcontainer>input:focus::placeholder {
     color: rgb(150, 150, 150);
 }
+
+*/
+
 .back {
-                
+
     a {
         padding: 8px 20px;
         border-radius: 12px;
         background: $gradient;
         color: $text2;
-        @extend %shadow;      
-        &:hover {opacity: .9; @extend %shadow2;}
+        @extend %shadow;
+
+        &:hover {
+            opacity: .9;
+            @extend %shadow2;
+        }
 
     }
 }

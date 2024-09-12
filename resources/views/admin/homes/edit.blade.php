@@ -3,12 +3,13 @@
 @section('content')
 
 <div class="container mt-5">
-    <h1>Aggiornamento dell'appartamento</h1>
-    <div class="button-manage my-3">
-                {{--? bottone indietro --}}
-                <div class="back">
-                    <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>              
-                </div>
+    <h2>Aggiornamento dell'appartamento</h2>
+    <div class="button-manage my-4">
+        {{--? bottone indietro --}}
+        <div class="back">
+            <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>
+        </div>
+    </div>
     <!-- Formulario di edizione -->
     <form action="{{ route('admin.homes.update', $home) }}" method="POST" enctype="multipart/form-data" class="mt-3">
         @method('PUT')
@@ -44,10 +45,28 @@
             @endif
         </div>
 
+        <!-- Indirizzo -->
+        <div class="form-group mb-3 formcontainer ">
+            <label for="address" class="@error('address') text-danger @enderror">Indirizzo</label>
+            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $home->address) }}" required>
+
+            @if ($errors->get('address'))
+            @foreach ($errors->get('address') as $message)
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @endforeach
+            @endif
+        </div>
+
         <!-- Letti -->
         <div class="form-group mb-3 formcontainer flex-row ">
-            <label for="beds" class="pt-2 @error('beds') text-danger @enderror">Letti</label>
-            <input type="number" name="beds" class="form-control w-25  @error('beds') is-invalid @enderror" value="{{ old('beds', $home->beds) }}" required>
+            <div class="d-flex">
+                <div class="col-2">
+                    <label for="beds" class="pt-2 @error('beds') text-danger @enderror">Numero di letti</label>
+                </div>
+                <input type="number" name="beds" class="form-control w-25  @error('beds') is-invalid @enderror" value="{{ old('beds', $home->beds) }}" required>
+            </div>
 
             @if ($errors->get('beds'))
             @foreach ($errors->get('beds') as $message)
@@ -60,8 +79,12 @@
 
         <!-- Bagni -->
         <div class="form-group mb-3 formcontainer flex-row">
-            <label for="bathrooms" class="pt-2 @error('bathrooms') text-danger @enderror">Bathrooms</label>
-            <input type="number" name="bathrooms" class="form-control w-25  @error('bathrooms') is-invalid @enderror" value="{{ old('bathrooms', $home->bathrooms) }}" required>
+            <div class="d-flex">
+                <div class="col-2">
+                    <label for="bathrooms" class="pt-2 @error('bathrooms') text-danger @enderror">Numero di bagni</label>
+                </div>
+                <input type="number" name="bathrooms" class="form-control w-25  @error('bathrooms') is-invalid @enderror" value="{{ old('bathrooms', $home->bathrooms) }}" required>
+            </div>
 
             @if ($errors->get('bathrooms'))
             @foreach ($errors->get('bathrooms') as $message)
@@ -74,8 +97,12 @@
 
         <!-- Stanze -->
         <div class="form-group mb-3 formcontainer flex-row">
-            <label for="rooms" class="pt-2 @error('rooms') text-danger @enderror">Rooms</label>
-            <input type="number" name="rooms" class="form-control w-25  @error('rooms') is-invalid @enderror" value="{{ old('rooms', $home->rooms) }}" required>
+            <div class="d-flex">
+                <div class="col-2">
+                    <label for="rooms" class="pt-2 @error('rooms') text-danger @enderror">Numero di stanze</label>
+                </div>
+                <input type="number" name="rooms" class="form-control w-25  @error('rooms') is-invalid @enderror" value="{{ old('rooms', $home->rooms) }}" required>
+            </div>
 
             @if ($errors->get('rooms'))
             @foreach ($errors->get('rooms') as $message)
@@ -88,27 +115,15 @@
 
         <!-- Metri quadrati (mq) -->
         <div class="form-group mb-3 formcontainer flex-row">
-            <label for="square_metres" class="pt-2 @error('square_metres') text-danger @enderror">Metri quadrati (mq)</label>
-            <input type="number" name="square_metres" class="form-control w-25  @error('square_metres') is-invalid @enderror" value="{{ old('square_metres', $home->square_metres) }}" required>
+            <div class="d-flex">
+                <div class="col-2">
+                    <label for="square_metres" class="pt-2 @error('square_metres') text-danger @enderror">Metri quadri (mq)</label>
+                </div>
+                <input type="number" name="square_metres" class="form-control w-25  @error('square_metres') is-invalid @enderror" value="{{ old('square_metres', $home->square_metres) }}" required>
+            </div>
 
             @if ($errors->get('square_metres'))
             @foreach ($errors->get('square_metres') as $message)
-            <div class="invalid-feedback">
-                {{$message}}
-            </div>
-            @endforeach
-            @endif
-        </div>
-
-
-
-        <!-- Indirizzo -->
-        <div class="form-group mb-3 formcontainer ">
-            <label for="address" class="@error('address') text-danger @enderror">Address</label>
-            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $home->address) }}" required>
-
-            @if ($errors->get('address'))
-            @foreach ($errors->get('address') as $message)
             <div class="invalid-feedback">
                 {{$message}}
             </div>
@@ -166,6 +181,4 @@
         <button class="effect mb-3">Aggiorna</button>
     </form>
 
-
-</div>
-@endsection
+    @endsection

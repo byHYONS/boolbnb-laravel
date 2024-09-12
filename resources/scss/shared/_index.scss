@@ -5,16 +5,20 @@
 -------------------------------- */
 .home-index {
 
-    .manage{
+    .manage {
 
         a {
-            padding: 8px 20px;
+            padding: 13px 26px;
             border-radius: 12px;
             background: $gradient;
             color: $text2;
-            @extend %shadow;      
-            &:hover {opacity: .9; @extend %shadow2;}
-    
+            @extend %shadow;
+
+            &:hover {
+                opacity: .9;
+                @extend %shadow2;
+            }
+
         }
     }
 
