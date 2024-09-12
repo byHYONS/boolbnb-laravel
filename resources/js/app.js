@@ -8,7 +8,9 @@ import * as bootstrap from 'bootstrap';
 
 //? importo il componente modale:
 import './components/modale';
+import confirmPassword from './components/password_confirm';
 
 //? import per le immagini:
 import.meta.glob(['../img/**']);
 
+confirmPassword();
