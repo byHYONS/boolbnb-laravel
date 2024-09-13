@@ -42,7 +42,7 @@
 
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control @if ($errors->get('address')) is-invalid @endif" id="address" name="address" value="{{old('address')}}">
+            <input type="text" class="form-control @if ($errors->get('address')) is-invalid @endif" id="address" name="address" value="{{old('address')}}" autocomplete="off">
             <ul id="address-suggestions" class="list-group"></ul>
             @if ($errors->get('address'))
             @foreach ($errors->get('address') as $message)
