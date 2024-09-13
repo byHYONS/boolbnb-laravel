@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\SearchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +20,14 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+
+//? rotta per l'autocomplete -> suggeritore:
+Route::get('homes/autocomplete', [SearchController::class, 'autocomplete']);
+
+//? rotta search:
+Route::get('homes/search', [SearchController::class, 'search']);
+
 //? rotta risorsa homes:
 Route::apiResource('homes', HomeController::class);
+
+
