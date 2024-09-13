@@ -20,8 +20,9 @@ class GeocodingController extends Controller
 
         //? richiesta API:
         $response = Http::withOptions([
-            'verify' => false, // Disabilita la verifica del certificato SSL
-        ])->get($url, ['key' => $apiKey]);
+            //? Disabilita la verifica del certificato SSL
+            'verify' => false, 
+        ])->get($url, ['key' => $apiKey,]);
 
         //? gestiamo la rispasta:
         if ($response->successful()) {
@@ -39,4 +40,3 @@ class GeocodingController extends Controller
         return ['error' => 'Errore nella chiamata API'];
     }
 }
-

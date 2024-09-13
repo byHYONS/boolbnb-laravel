@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GeoAutoSearchController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\Admin\VisualController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// use App\Http\Controllers\Admin\SuggestionController;
 
 use App\Http\Controllers\Admin\GeocodingController;
 
@@ -55,6 +58,10 @@ Route::middleware('auth', 'verified')
 //? rotta per chiamata API tomtom:
 Route::get('/get-coordinates', [GeocodingController::class, 'getCoordinates'])
     ->name('get.coordinates');
+
+//? rotta per il suggeritore degli indirizzi chiamata API tomtom:
+Route::get('/get-address-suggestions', [GeoAutoSearchController::class, 'getAddressSuggestions'])
+    ->name('get.address.suggestions');
 
 
 Route::middleware('auth')->group(function () {

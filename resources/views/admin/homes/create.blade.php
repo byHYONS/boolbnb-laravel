@@ -43,6 +43,7 @@
         <div class="mb-3">
             <label for="address" class="form-label">Indirizzo</label>
             <input type="text" class="form-control @if ($errors->get('address')) is-invalid @endif" id="address" name="address" value="{{old('address')}}">
+            <ul id="address-suggestions" class="list-group"></ul>
             @if ($errors->get('address'))
             @foreach ($errors->get('address') as $message)
             <div class="invalid-feedback">
@@ -157,4 +158,12 @@
 
         <button class="effect mb-3">Affitta</button>
     </form>
+    @endsection
+
+    {{--? script per il suggeritore degli indirizzi --}}
+    @section('scripts')
+    <script>
+        const addressSuggestionsUrl = "{{ route('get.address.suggestions') }}";
+    </script>
+    <script src="{{ asset('js/address-autocomplete.js') }}"></script>
     @endsection

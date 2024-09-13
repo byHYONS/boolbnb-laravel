@@ -49,6 +49,7 @@
         <div class="form-group mb-3 formcontainer ">
             <label for="address" class="@error('address') text-danger @enderror">Indirizzo</label>
             <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $home->address) }}" required>
+            <ul id="address-suggestions" class="list-group"></ul>
 
             @if ($errors->get('address'))
             @foreach ($errors->get('address') as $message)
@@ -182,3 +183,12 @@
     </form>
 
     @endsection
+
+    {{--? script per il suggeritore degli indirizzi --}}
+    @section('scripts')
+    <script>
+        const addressSuggestionsUrl = "{{ route('get.address.suggestions') }}";
+    </script>
+    <script src="{{ asset('js/address-autocomplete.js') }}"></script>
+    @endsection
+    
