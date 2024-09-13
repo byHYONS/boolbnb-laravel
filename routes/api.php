@@ -19,7 +19,5 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-
-Route::get('home', [HomeController::class, 'index']);
-
-// Route::get('home', [HomeController::class, 'show']);
+//? rotta risorsa homes:
+Route::apiResource('homes', HomeController::class);

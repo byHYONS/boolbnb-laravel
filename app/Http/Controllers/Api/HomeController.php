@@ -14,7 +14,7 @@ class HomeController extends Controller
         // $homes = Home::all();
 
         //? paginazione a 6 elementi con relazione services:
-        $homes = Home::with('services')->paginate(6);
+        $homes = Home::with('services', 'user')->paginate(6);
 
         if ($homes) {
             return response()->json([
@@ -29,22 +29,22 @@ class HomeController extends Controller
         }
     }
 
-    // public function show(String $slug)
-    // {
-    //     //? dettaglio con relazione services:
-    //     $homes = Home::where('slug', $slug)->with('services')->first();
+    public function show(String $slug)
+    {
+        //? dettaglio con relazione services:
+        $homes = Home::where('slug', $slug)->with('services', 'user')->first();
 
-    //     if ($homes) {
-    //         return response()->json([
-    //             'status' => 'success',
-    //             'results' => $homes
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => 'failed',
-    //             'results' => null
-    //         ], 404);
-    //     }
+        if ($homes) {
+            return response()->json([
+                'status' => 'success',
+                'results' => $homes
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'results' => null
+            ], 404);
+        }
         
-    // }
+    }
 }
