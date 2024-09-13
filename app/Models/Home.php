@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Home extends Model
 {
@@ -13,6 +14,20 @@ class Home extends Model
      protected $guarded = ['id'];
 
      // protected $fillable = [''];
+
+
+     //? appendiamo un nuovo campo per le immagini:
+    protected $appends = ['image_frontend'];
+
+    //? con mutators & casting creiamo un nuovo campo per le immagini:
+    protected function imageFrontend(): Attribute
+    {
+        return new Attribute(
+
+                get: fn() => $this->image ? env('APP_FRONTEND_IMG_URL', 'http.//localhost') . $this->image : null,
+
+        );
+    }
 
 
      //? relazione molti a molti con ADS:
