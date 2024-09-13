@@ -20,7 +20,7 @@ class GeocodingController extends Controller
 
         //? richiesta API:
         $response = Http::withOptions([
-            //? Disabilita la verifica del certificato SSL
+            //? Disabilita la verifica del certificato SSL:
             'verify' => false, 
         ])->get($url, ['key' => $apiKey,]);
 

@@ -21,7 +21,10 @@ class GeoAutoSearchController extends Controller
         $apiKey = env('TOMTOM_API_KEY');
         $url = "https://api.tomtom.com/search/2/search/" . urlencode($query) . ".json";
 
-        $response = Http::withOptions(['verify' => false])->get($url, [
+        $response = Http::withOptions([
+            //? Disabilita la verifica del certificato SSL:
+            'verify' => false
+            ])->get($url, [
             'key' => $apiKey,
             'typeahead' => 'true',
             'limit' => 5
