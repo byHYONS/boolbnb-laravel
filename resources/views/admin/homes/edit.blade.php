@@ -48,7 +48,7 @@
         <!-- Indirizzo -->
         <div class="form-group mb-3 formcontainer ">
             <label for="address" class="@error('address') text-danger @enderror">Indirizzo</label>
-            <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $home->address) }}" required>
+            <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $home->address) }}" required>
             <ul id="address-suggestions" class="list-group"></ul>
 
             @if ($errors->get('address'))
@@ -191,4 +191,3 @@
     </script>
     <script src="{{ asset('js/address-autocomplete.js') }}"></script>
     @endsection
-    
