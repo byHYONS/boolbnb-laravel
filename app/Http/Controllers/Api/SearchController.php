@@ -52,6 +52,7 @@ class SearchController extends Controller
             ->orderBy('distance')
             //? icluiamo nei risultati le relazioni:
             ->with('services', 'user')
+            ->limit(12)
             ->get();
 
         if ($homes->isEmpty()) {
