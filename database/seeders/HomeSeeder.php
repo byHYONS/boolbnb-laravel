@@ -34,8 +34,8 @@ class HomeSeeder extends Seeder
             $apartment->square_metres = $new_apartment['mq'];
             $apartment->address = $new_apartment['address'];
             $apartment->image = $new_apartment['image'];
-            $apartment->lat = "lat";
-            $apartment->long = "long";
+            $apartment->lat = $new_apartment['lat'];
+            $apartment->long = $new_apartment['long'];
 
             $apartment->save();
         }

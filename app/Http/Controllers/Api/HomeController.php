@@ -14,7 +14,7 @@ class HomeController extends Controller
         // $homes = Home::all();
 
         //? paginazione a 6 elementi con relazione services:
-        $homes = Home::with('services', 'user')->paginate(6);
+        $homes = Home::with('services', 'user')->paginate(10);
 
         if ($homes) {
             return response()->json([
@@ -45,6 +45,5 @@ class HomeController extends Controller
                 'results' => null
             ], 404);
         }
-        
     }
 }
