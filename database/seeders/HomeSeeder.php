@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Home;
+use GuzzleHttp\Client;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +14,13 @@ class HomeSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    private $tomtomApiKey;
+    public function __construct()
+    {
+        // chiave API di TOMTOM
+        $this->tomtomApiKey = env('TOMTOM_API_KEY');
+    }
+
     public function run(): void
     {
         Schema::disableForeignKeyConstraints();
@@ -20,6 +28,9 @@ class HomeSeeder extends Seeder
         Home::truncate();
 
         $apartments = config('apartments');
+
+        // Crear una instancia del cliente HTTP
+        $client = new Client();
 
         foreach ($apartments as $new_apartment) {
             $apartment = new Home();
@@ -34,9 +45,21 @@ class HomeSeeder extends Seeder
             $apartment->square_metres = $new_apartment['mq'];
             $apartment->address = $new_apartment['address'];
             $apartment->image = $new_apartment['image'];
-            $apartment->lat = $new_apartment['lat'];
-            $apartment->long = $new_apartment['long'];
 
+            // Obtener latitud y longitud usando la API de TOMTOM
+            $response = $client->get('https://api.tomtom.com/search/2/geocode/' . urlencode($new_apartment['address']) . '.json', [
+                'query' => [
+                    'key' => $this->tomtomApiKey
+                ],
+                'verify' => false, 
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+
+            if (isset($data['results'][0])) {
+                $apartment->lat = $data['results'][0]['position']['lat'];
+                $apartment->long = $data['results'][0]['position']['lon'];
+            }
             $apartment->save();
         }
 

@@ -24,7 +24,7 @@ class AdHomeSeeder extends Seeder
         AdHome::truncate();
 
         //? popoliamo random la tabella pivot:
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             $ad_home = new AdHome();
 
             $ad_home->ad_id = Ad::inRandomOrder()->first()->id;

@@ -23,7 +23,7 @@ class HomeService extends Seeder
         ModelsHomeService::truncate();
 
         //? popoliamo random la tabella pivot:
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             $home_service = new ModelsHomeService();
 
             $home_service->home_id = Home::inRandomOrder()->first()->id;
