@@ -17,7 +17,7 @@
 
         {{-- <!-- Titolo -->--}}
         <div class="form-group mb-3 formcontainer ">
-            <label for="title" class="@error('title') text-danger @enderror">Titolo</label>
+            <label for="title" class="@error('title') text-danger @enderror">Titolo <small>*</small></label>
             <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
                 value="{{ old('title', $home->title) }}" required>
 
@@ -47,7 +47,7 @@
 
         <!-- Indirizzo -->
         <div class="form-group mb-3 formcontainer ">
-            <label for="address" class="@error('address') text-danger @enderror">Indirizzo</label>
+            <label for="address" class="@error('address') text-danger @enderror">Indirizzo <small>*</small></label>
             <input type="text" id="address" name="address" class="form-control @error('address') is-invalid @enderror" value="{{ old('address', $home->address) }}" required>
             <ul id="address-suggestions" class="list-group"></ul>
 
@@ -64,7 +64,7 @@
         <div class="form-group mb-3 formcontainer flex-row ">
             <div class="d-flex">
                 <div class="col-2">
-                    <label for="beds" class="pt-2 @error('beds') text-danger @enderror">Numero di letti</label>
+                    <label for="beds" class="pt-2 @error('beds') text-danger @enderror">Numero di letti <small>*</small></label>
                 </div>
                 <input type="number" name="beds" class="form-control w-25  @error('beds') is-invalid @enderror" value="{{ old('beds', $home->beds) }}" required>
             </div>
@@ -82,7 +82,7 @@
         <div class="form-group mb-3 formcontainer flex-row">
             <div class="d-flex">
                 <div class="col-2">
-                    <label for="bathrooms" class="pt-2 @error('bathrooms') text-danger @enderror">Numero di bagni</label>
+                    <label for="bathrooms" class="pt-2 @error('bathrooms') text-danger @enderror">Numero di bagni <small>*</small></label>
                 </div>
                 <input type="number" name="bathrooms" class="form-control w-25  @error('bathrooms') is-invalid @enderror" value="{{ old('bathrooms', $home->bathrooms) }}" required>
             </div>
@@ -100,7 +100,7 @@
         <div class="form-group mb-3 formcontainer flex-row">
             <div class="d-flex">
                 <div class="col-2">
-                    <label for="rooms" class="pt-2 @error('rooms') text-danger @enderror">Numero di stanze</label>
+                    <label for="rooms" class="pt-2 @error('rooms') text-danger @enderror">Numero di stanze <small>*</small></label>
                 </div>
                 <input type="number" name="rooms" class="form-control w-25  @error('rooms') is-invalid @enderror" value="{{ old('rooms', $home->rooms) }}" required>
             </div>
@@ -118,7 +118,7 @@
         <div class="form-group mb-3 formcontainer flex-row">
             <div class="d-flex">
                 <div class="col-2">
-                    <label for="square_metres" class="pt-2 @error('square_metres') text-danger @enderror">Metri quadri (mq)</label>
+                    <label for="square_metres" class="pt-2 @error('square_metres') text-danger @enderror">Metri quadri (mq) <small>*</small></label>
                 </div>
                 <input type="number" name="square_metres" class="form-control w-25  @error('square_metres') is-invalid @enderror" value="{{ old('square_metres', $home->square_metres) }}" required>
             </div>
@@ -134,7 +134,7 @@
 
         <!-- Servizi -->
         <div class="form-group mb-3">
-            <label for="services">Services</label>
+            <label for="services">Servizi <small>*</small></label>
             <div class="d-flex">
                 @foreach ($services as $service)
                 <div class="form-check px-5">
@@ -146,6 +146,9 @@
                 </div>
                 @endforeach
             </div>
+            <!-- Messaggio di errore per validazione frontend -->
+            <div id="service-error" class="text-danger" style="display: none;">Devi selezionare almeno un servizio.</div>
+
             @if ($errors->has('services'))
             <div class="invalid-feedback d-block">
                 @foreach ($errors->get('services') as $message)
@@ -157,7 +160,7 @@
         {{-- Immagini--}}
 
         <div class="mb-3 ">
-            <label for="images" class="form-label">Immagini</label>
+            <label for="images" class="form-label">Immagine <small>*</small></label>
             <input type="file" class="form-control" id="images" name="image" multiple>
             @if ($errors->get('image'))
             @foreach ($errors->get('image') as $message)
@@ -179,7 +182,7 @@
 
 
         <!-- Aggiornamento -->
-        <button class="effect mb-3">Aggiorna</button>
+        <button class="effect mb-3" type="submit" onclick="return validateForm()">Aggiorna</button>
     </form>
 
     @endsection
@@ -190,4 +193,7 @@
         const addressSuggestionsUrl = "{{ route('get.address.suggestions') }}";
     </script>
     <script src="{{ asset('js/address-autocomplete.js') }}"></script>
+    
+    <!-- Includi il file JS per la validazione -->
+    <script src="{{ asset('js/validateCheckbox.js') }}"></script>
     @endsection
