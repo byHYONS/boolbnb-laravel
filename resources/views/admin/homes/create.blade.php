@@ -162,7 +162,8 @@
         <p><small>*</small> Questi campi sono richiesti</p>
 
         
-        <button class="effect mb-3" type="submit" onclick="return validateForm()">Affitta</button>
+        {{-- <button class="effect mb-3" type="submit" onclick="return validateForm()">Affitta</button> --}}
+        <button class="effect mb-3 submit-checkbox" type="submit">Affitta</button>
 
     </form>
     @endsection
@@ -173,7 +174,4 @@
         const addressSuggestionsUrl = "{{ route('get.address.suggestions') }}";
     </script>
     <script src="{{ asset('js/address-autocomplete.js') }}"></script>
-
-    <!-- Includi il file JS per la validazione -->
-    <script src="{{ asset('js/validateCheckbox.js') }}"></script>
     @endsection

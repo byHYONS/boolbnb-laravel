@@ -13,4 +13,7 @@ import confirmPassword from './components/password_confirm';
 //? import per le immagini:
 import.meta.glob(['../img/**']);
 
+import validateForm from '../../public/js/validateCheckbox';
+
 confirmPassword();
+validateForm();
