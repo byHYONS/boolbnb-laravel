@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMessageRequest;
+use App\Mail\NewMessage;
 use App\Models\Home;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -72,6 +74,9 @@ class HomeController extends Controller
             $message->content = $data['content'];
     
             $message->save();
+
+            //? invio email:
+            Mail::to('samuele@hyonsre.com')->send(new NewMessage($message));
     
             return response()->json([
                 'status' => 'success', 
