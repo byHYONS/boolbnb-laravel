@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function show(String $slug)
     {
         //? dettaglio con relazione services:
-        $homes = Home::where('slug', $slug)->with('services', 'user')->first();
+        $homes = Home::where('slug', $slug)->with('services', 'user','messages')->first();
 
         if ($homes) {
             return response()->json([

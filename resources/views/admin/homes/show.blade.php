@@ -68,6 +68,7 @@
                                 Nessuna servizio selezionato
                                 @endforelse
                             </li>
+                            
                         
                         </ul>
                     </div>
@@ -76,7 +77,30 @@
                     <span>Descrizione: </span>{{$home->description}}
                 </p>
                 
+                <h3 class="com">Commenti:</h3>
+
+                @if ($home->messages()->count())
+                <div class="row row-gap-5 my-5">
+                    @foreach ( $home->messages as $message )
+                        
+                    <div class="col-lg-6 col-md-12">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ $message ->name}}</h4>
+                                <em>{{ $message ->email}}</em>
+                                <p class="card-text">{{ $message ->content }}</p>
+                            </div>
+    
+                    </div>
+                    @endforeach
+                </div>
+                @else
+                    <div class="alert alert-danger" role="alert">
+                        Nessun commento trovato          
+                    </div>
+                @endif
+                
             </div>
+
         </div>
     </div>
         
