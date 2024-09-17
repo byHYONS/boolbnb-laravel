@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMessageRequest;
 use App\Models\Home;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -45,5 +47,33 @@ class HomeController extends Controller
                 'results' => null
             ], 404);
         }
+    }
+
+    public function storeMessage(StoreMessageRequest $request, $slug)
+    {
+        //? trova l'appartamento associato allo slug:
+        $home = Home::where('slug', $slug)->first();
+
+        if (!$home) {
+            return response()->json(['status' => 'failed', 'message' => 'Appartamento non trovato'], 404);
+        }
+
+       $data = $request->validated();
+
+        // Crea e salva il messaggio
+        $message = new Message();
+
+        $message->home_id = $home->id;
+
+        $message->name = $data['name'];
+        $message->email = $data['email'];
+        $message->content = $data['content'];
+
+        $message->save();
+
+        return response()->json([
+            'status' => 'success', 
+            'message' => 'Messaggio inviato con successo!'
+        ], 201);
     }
 }

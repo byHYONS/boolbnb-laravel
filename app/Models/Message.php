@@ -9,10 +9,14 @@ class Message extends Model
 {
     use HasFactory;
 
+    //? mass update:
+    protected $guarded = ['id'];
+
+
 
     //? relazione uno a molti con HOMES:
     public function home()
     {
-        return $this->belongsTo(Message::class);
+        return $this->belongsTo(Home::class);
     }
 }

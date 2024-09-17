@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+//? rotta per i messaggi: 
+Route::post('/homes/{slug}/message', [HomeController::class, 'storeMessage']);
 
 //? rotta per l'autocomplete -> suggeritore:
 Route::get('homes/autocomplete', [SearchController::class, 'autocomplete']);

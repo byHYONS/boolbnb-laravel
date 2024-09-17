@@ -11,7 +11,7 @@ class StoreMessageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,25 @@ class StoreMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|min:5|max:50|string',
+            'email' => 'required|min:10|max:250|string|unique:messages',
+            'content' => 'required|min:10|max:1000|string',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Il nome è obbligatorio',
+            'name.min' => 'Il nome deve contenere almeno 5 caratteri',
+            'name.max' => 'Il nome può contenere al massimo 50 caratteri',
+            'email.string' => 'L\'email deve essere una stringa',
+            'email.min' => 'L\'email deve contenere almeno 5 caratteri',
+            'email.max' => 'L\'email può contenere al massimo 250 caratteri',
+            'email.unique' => 'Questa email esiste già',
+            'content.min' => 'La descrizione deve contenere almeno 10 caratteri',
+            'content.max' => 'La descrizione può contenere al massimo 1000 caratteri',
+            'content.string' => 'La descrizione deve essere una stringa',
         ];
     }
 }
