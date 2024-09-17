@@ -8,6 +8,7 @@ use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class HomeService extends Seeder
 {
@@ -16,24 +17,40 @@ class HomeService extends Seeder
      */
     public function run(): void
     {
-        //? disabilito relazioni:
         Schema::disableForeignKeyConstraints();
 
-        //? ripulisco tabella:
         ModelsHomeService::truncate();
 
-        //? popoliamo random la tabella pivot:
-        for ($i = 0; $i < 120; $i++) {
-            $home_service = new ModelsHomeService();
+        // Recupera tutti gli homes e i servizi
+        $homes = Home::pluck('id')->toArray();
+        $services = Service::pluck('id')->toArray();
 
-            $home_service->home_id = Home::inRandomOrder()->first()->id;
-            $home_service->service_id = Service::inRandomOrder()->first()->id;
+        // Numero di associazioni da creare
+        $numAssociations = 120;
 
-            $home_service->save();
+        // Genera e inserisce associazioni uniche
+        $insertData = [];
+        while (count($insertData) < $numAssociations) {
+            // Seleziona un home e un servizio casuali
+            $homeId = $homes[array_rand($homes)];
+            $serviceId = $services[array_rand($services)];
 
+            // Controlla se la combinazione esiste già nella tabella
+            $exists = ModelsHomeService::where('home_id', $homeId)
+                ->where('service_id', $serviceId)
+                ->exists();
+
+            if (!$exists) {
+                // Aggiunge la combinazione all'array di dati da inserire
+                $insertData[] = [
+                    'home_id' => $homeId,
+                    'service_id' => $serviceId,
+                ];
+            }
         }
 
-        //? abilito relazione:
+        DB::table('home_service')->insert($insertData);
+
         Schema::enableForeignKeyConstraints();
     }
 }
