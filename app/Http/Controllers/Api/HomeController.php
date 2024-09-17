@@ -7,6 +7,8 @@ use App\Http\Requests\StoreMessageRequest;
 use App\Models\Home;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -51,29 +53,44 @@ class HomeController extends Controller
 
     public function storeMessage(StoreMessageRequest $request, $slug)
     {
-        //? trova l'appartamento associato allo slug:
-        $home = Home::where('slug', $slug)->first();
+        try {
+            //? trova l'appartamento associato allo slug:
+            $home = Home::where('slug', $slug)->first();
+    
+            if (!$home) {
+                return response()->json(['status' => 'failed', 'message' => 'Appartamento non trovato'], 404);
+            }
+    
+           $data = $request->validated();
+    
+            $message = new Message();
+    
+            $message->home_id = $home->id;
+    
+            $message->name = $data['name'];
+            $message->email = $data['email'];
+            $message->content = $data['content'];
+    
+            $message->save();
+    
+            return response()->json([
+                'status' => 'success', 
+                'message' => 'Messaggio inviato con successo!'
+            ], 201);
 
-        if (!$home) {
-            return response()->json(['status' => 'failed', 'message' => 'Appartamento non trovato'], 404);
+        } catch (ValidationException $e) {
+            //? erori di validazione:
+            return response()->json([
+                'status' => 'failed',
+                'errors' => $e->errors(), 
+            ], 422);
+        } catch (Exception $e) {
+            //? gestione altri errori:
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Si è verificato un errore durante l\'invio del messaggio.',
+                'error' => $e->getMessage() 
+            ], 500);
         }
-
-       $data = $request->validated();
-
-        // Crea e salva il messaggio
-        $message = new Message();
-
-        $message->home_id = $home->id;
-
-        $message->name = $data['name'];
-        $message->email = $data['email'];
-        $message->content = $data['content'];
-
-        $message->save();
-
-        return response()->json([
-            'status' => 'success', 
-            'message' => 'Messaggio inviato con successo!'
-        ], 201);
     }
 }
