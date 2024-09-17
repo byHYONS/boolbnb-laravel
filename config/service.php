@@ -8,7 +8,7 @@ return [
     ],
     [
         "id" => 2,
-        "name" => "Posto Macchina",
+        "name" => "Parcheggio",
         "icon" => "car-side",
     ],
     [
