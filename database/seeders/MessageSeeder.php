@@ -22,7 +22,7 @@ class MessageSeeder extends Seeder
         Message::truncate();
 
         //? popolo random la tabella:
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 120; $i++) {
             
             $new_message = new Message();
 
