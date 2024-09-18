@@ -77,30 +77,25 @@
                     <span>Descrizione: </span>{{$home->description}}
                 </p>
                 
-                <h3 class="com">Commenti:</h3>
-
-                @if ($home->messages()->count())
-                <div class="row row-gap-5 my-5">
-                    @foreach ( $home->messages as $message )
-                        
+                <hr class="mt-4">
+                {{--? messaggi da frontend: --}}
+                <div class="row row-gap-3 my-4">
+                    <h3 class="com">Messaggi:</h3>
+                    @forelse ($home->messages as $message)               
                     <div class="col-lg-6 col-md-12">
-                            <div class="card-body">
-                                <h4 class="card-title">{{ $message ->name}}</h4>
-                                <em>{{ $message ->email}}</em>
-                                <p class="card-text">{{ $message ->content }}</p>
-                            </div>
-    
+                        <div class="card-body">
+                            <h4 class="card-title">{{ $message ->name}}</h4>
+                            <em>{{ $message ->email}}</em>
+                            <p class="card-text">{{ $message ->content }}</p>
+                        </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="">
+                        <h3>Non ci sono messaggi</h3> 
+                    </div>
+                    @endforelse
                 </div>
-                @else
-                    <div class="alert alert-danger" role="alert">
-                        Nessun commento trovato          
-                    </div>
-                @endif
                 
-            </div>
-
         </div>
     </div>
         
