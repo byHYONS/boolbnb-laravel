@@ -182,7 +182,7 @@
 
 
         <!-- Aggiornamento -->
-        <button class="effect mb-3 submit-checkbox" type="submit">Aggiorna</button>
+        <button class="effect mb-3 submit-checkbox" onclick="validateForm()" type="submit">Modifica Casa</button>
     </form>
 
     @endsection
@@ -193,4 +193,5 @@
         const addressSuggestionsUrl = "{{ route('get.address.suggestions') }}";
     </script>
     <script src="{{ asset('js/address-autocomplete.js') }}"></script>
+    <script src="{{ asset('js/validateCheckbox.js') }}"></script>
     @endsection

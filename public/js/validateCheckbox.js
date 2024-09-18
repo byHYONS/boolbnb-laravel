@@ -1,9 +1,12 @@
-export default function validateForm() {
+/* ***********************************
+ *          VALIDATION
+ *           CHECKBOX
+*********************************** */
+
+function validateForm() {
     // Trova tutte le checkbox
-    const submitCheckbox = document.querySelector('.submit-checkbox');
-    
-    submitCheckbox.addEventListener('click', function(event){
-        let atLeastOneChecked = false;
+
+    let atLeastOneChecked = false;
         const checkboxes = document.querySelectorAll('input[name="services[]"]');
         
         // Verifica se almeno una checkbox è selezionata
@@ -23,9 +26,6 @@ export default function validateForm() {
         document.getElementById('service-error').style.display = 'none';
         
         // Restituisci true per consentire l'invio del form
-        // event.preventDefault();
         return true;
-    
 
-});
 }

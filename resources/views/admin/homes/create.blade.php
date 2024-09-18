@@ -155,15 +155,13 @@
 
         <div class="form-check mb-3">
             <input type="hidden" name="active" value="0">
-            <input class="form-check-input" type="checkbox" name="active" id="active" value="1" required>
+            <input class="form-check-input" type="checkbox" name="active" id="active" value="1">
             <label class="form-check-label" for="active"> Visibile </label>
         </div>
 
         <p><small>*</small> Questi campi sono richiesti</p>
 
-        
-        {{-- <button class="effect mb-3" type="submit" onclick="return validateForm()">Affitta</button> --}}
-        <button class="effect mb-3 submit-checkbox" type="submit">Affitta</button>
+        <button class="effect mb-3 submit-checkbox" onclick="validateForm()" type="submit">Inserisci Casa</button>
 
     </form>
     @endsection
@@ -174,4 +172,5 @@
         const addressSuggestionsUrl = "{{ route('get.address.suggestions') }}";
     </script>
     <script src="{{ asset('js/address-autocomplete.js') }}"></script>
+    <script src="{{ asset('js/validateCheckbox.js') }}"></script>
     @endsection
