@@ -38,7 +38,7 @@ class HomeController extends Controller
     public function show(String $slug)
     {
         //? dettaglio con relazione services:
-        $homes = Home::where('slug', $slug)->with('services', 'user','messages')->first();
+        $homes = Home::where('slug', $slug)->with('services', 'user', 'messages')->first();
 
         if ($homes) {
             return response()->json([
@@ -58,43 +58,42 @@ class HomeController extends Controller
         try {
             //? trova l'appartamento associato allo slug:
             $home = Home::where('slug', $slug)->first();
-    
+
             if (!$home) {
                 return response()->json(['status' => 'failed', 'message' => 'Appartamento non trovato'], 404);
             }
-    
-           $data = $request->validated();
-    
+
+            $data = $request->validated();
+
             $message = new Message();
-    
+
             $message->home_id = $home->id;
-    
+
             $message->name = $data['name'];
             $message->email = $data['email'];
             $message->content = $data['content'];
-    
+
             $message->save();
 
             //? invio email:
-            Mail::to('samuele@hyonsre.com')->send(new NewMessage($message));
-    
+            Mail::to($data['email'])->send(new NewMessage($message));
+
             return response()->json([
-                'status' => 'success', 
+                'status' => 'success',
                 'message' => 'Messaggio inviato con successo!'
             ], 201);
-
         } catch (ValidationException $e) {
             //? erori di validazione:
             return response()->json([
                 'status' => 'failed',
-                'errors' => $e->errors(), 
+                'errors' => $e->errors(),
             ], 422);
         } catch (Exception $e) {
             //? gestione altri errori:
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Si è verificato un errore durante l\'invio del messaggio.',
-                'error' => $e->getMessage() 
+                'error' => $e->getMessage()
             ], 500);
         }
     }
