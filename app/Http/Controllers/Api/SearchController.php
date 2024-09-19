@@ -12,14 +12,18 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
+        //* Metodo Haversine:
         $city = $request->input('city');
-        //? distanza di default 20 km:
-        $distance = $request->input('distance', 20); 
+        // //? distanza di default 20 km:
+        // $distance = $request->input('distance', 20); 
+
+        //* T_Distance_Sphere:
+        $distance = $request->input('distance', 20000);
 
         //? validazione input:
         $validator = Validator::make($request->all(), [
             'city' => 'required|string|max:255',
-            'distance' => 'numeric|min:1|max:1000',
+            'distance' => 'numeric|min:1|max:100000',
         ]);
 
         if ($validator->fails()) {
@@ -43,11 +47,41 @@ class SearchController extends Controller
         $longitude = $coordinates['longitude'];
 
         //? query su db per trovare le case entro la distanza specificata * formula per calcolare le case da prendere:
-        $homes = Home::selectRaw("
-                *, ( 6371 * acos( cos( radians(?) ) * cos( radians(lat) )
-                * cos( radians(`long`) - radians(?) ) + sin( radians(?) )
-                * sin( radians(lat) ) ) ) AS distance
-            ", [$latitude, $longitude, $latitude])
+        // $homes = Home::selectRaw("
+        //         *, ( 6371 * acos( cos( radians(?) ) * cos( radians(lat) )
+        //         * cos( radians(`long`) - radians(?) ) + sin( radians(?) )
+        //         * sin( radians(lat) ) ) ) AS distance
+        //     ", [$latitude, $longitude, $latitude])
+        //     ->having('distance', '<=', $distance)
+        //     ->orderBy('distance')
+        //     //? icluiamo nei risultati le relazioni:
+        //     ->with('services', 'user')
+        //     ->limit(12)
+        //     ->get();
+
+
+
+            // $homes = Home::selectRaw("
+            //     *,
+            //     ST_Distance_Sphere(point(long, lat), point(?, ?)) as distance
+            // ", [$latitude, $longitude])
+            // ->whereRaw(
+            //     "ST_Distance_Sphere(point(long, lat), point(?, ?)) < ?",
+            //     [$latitude, $longitude, $distance]
+            // )
+            // ->orderBy('distance', 'asc')
+            // ->with('services', 'user')
+            // ->limit(12)
+            // ->get();
+
+
+
+            $homes = Home::selectRaw("
+                *, ST_Distance_Sphere(
+                    POINT(`long`, `lat`),  -- Il punto lat/long del record nella tabella `homes`
+                    POINT(?, ?)            -- Le coordinate di latitudine e longitudine dell'utente
+                ) AS distance
+            ", [$longitude, $latitude])  // Sostituisci i valori con quelli delle variabili dell'utente
             ->having('distance', '<=', $distance)
             ->orderBy('distance')
             //? icluiamo nei risultati le relazioni:
@@ -55,11 +89,13 @@ class SearchController extends Controller
             ->limit(12)
             ->get();
 
+
+
         if ($homes->isEmpty()) {
             return response()->json([
                 'status' => 'success',
                 'results' => [],
-                'message' => 'Nessuna casa trovata entro ' . $distance . ' km da ' . $city . '.',
+                // 'message' => 'Nessuna casa trovata entro ' . $distance . ' km da ' . $city . '.',
             ]);
         }
 
