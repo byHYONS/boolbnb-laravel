@@ -67,6 +67,15 @@
                             Nessuna servizio selezionato
                             @endforelse
                         </li>
+                        <li class="mb-3">
+                            @forelse ($home->ads as $ad )
+                            
+                            <p><span>tipo di sponsorizzata </span>{{$ad->title}}</p>
+                            <p><span>data inizio </span>{{$ad->created_at->format('d/m/Y')}}</p>                               
+                            @empty
+                                <p>Non ci sono sponsorizzate!</p>
+                            @endforelse
+                        </li>
 
 
                     </ul>
