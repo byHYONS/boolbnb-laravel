@@ -13,6 +13,7 @@ class Ad extends Model
     //? relazione molti a molti con HOME:
     public function homes()
     {
-        return $this->belongsToMany(Home::class);
+        return $this->belongsToMany(Home::class, 'ad_home')
+            ->withPivot('ad_id', 'home_id', 'created_at', 'updated_at');
     }
 }

@@ -12,12 +12,14 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        //* Metodo Haversine:
         $city = $request->input('city');
+       
+        //* Metodo Haversine:
         // //? distanza di default 20 km:
         // $distance = $request->input('distance', 20); 
-
+        
         //* T_Distance_Sphere:
+        // //? distanza di default 20 km:
         $distance = $request->input('distance', 20000);
 
         //? validazione input:
@@ -46,6 +48,7 @@ class SearchController extends Controller
         $latitude = $coordinates['latitude'];
         $longitude = $coordinates['longitude'];
 
+        //* Metodo Haversine:
         //? query su db per trovare le case entro la distanza specificata * formula per calcolare le case da prendere:
         // $homes = Home::selectRaw("
         //         *, ( 6371 * acos( cos( radians(?) ) * cos( radians(lat) )
@@ -59,36 +62,19 @@ class SearchController extends Controller
         //     ->limit(12)
         //     ->get();
 
-
-
-            // $homes = Home::selectRaw("
-            //     *,
-            //     ST_Distance_Sphere(point(long, lat), point(?, ?)) as distance
-            // ", [$latitude, $longitude])
-            // ->whereRaw(
-            //     "ST_Distance_Sphere(point(long, lat), point(?, ?)) < ?",
-            //     [$latitude, $longitude, $distance]
-            // )
-            // ->orderBy('distance', 'asc')
-            // ->with('services', 'user')
-            // ->limit(12)
-            // ->get();
-
-
-
-            $homes = Home::selectRaw("
-                *, ST_Distance_Sphere(
-                    POINT(`long`, `lat`),  -- Il punto lat/long del record nella tabella `homes`
-                    POINT(?, ?)            -- Le coordinate di latitudine e longitudine dell'utente
-                ) AS distance
-            ", [$longitude, $latitude])  // Sostituisci i valori con quelli delle variabili dell'utente
-            ->having('distance', '<=', $distance)
-            ->orderBy('distance')
-            //? icluiamo nei risultati le relazioni:
-            ->with('services', 'user')
-            ->limit(12)
-            ->get();
-
+        //* T_Distance_Sphere:
+        $homes = Home::selectRaw("
+            *, ST_Distance_Sphere(
+                POINT(`long`, `lat`),  -- Il punto lat/long del record nella tabella `homes`
+                POINT(?, ?)            -- Le coordinate di latitudine e longitudine dell'utente
+            ) AS distance
+        ", [$longitude, $latitude])  // Sostituisci i valori con quelli delle variabili dell'utente
+        ->having('distance', '<=', $distance)
+        ->orderBy('distance')
+        //? icluiamo nei risultati le relazioni:
+        ->with('services', 'user')
+        ->limit(12)
+        ->get();
 
 
         if ($homes->isEmpty()) {

@@ -11,6 +11,8 @@ class AdHome extends Model
 
     protected $table = 'ad_home';
 
+    public $timestamps = true;
+
 
 
 }

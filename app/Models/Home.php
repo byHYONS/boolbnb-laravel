@@ -33,7 +33,8 @@ class Home extends Model
      //? relazione molti a molti con ADS:
      public function ads()
     {
-        return $this->belongsToMany(Ad::class);
+        return $this->belongsToMany(Ad::class, 'ad_home')
+            ->withPivot('ad_id', 'home_id', 'created_at', 'updated_at');
     }
 
     //? relazione uno a molti con USER:

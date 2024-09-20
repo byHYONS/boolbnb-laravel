@@ -87,6 +87,13 @@
                         Compra Visibilità
                     </a>
                 </div>
+                
+                {{--? messaggio di avvenuto pagamento --}}
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
             </div>
 
             <hr class="mt-4">
