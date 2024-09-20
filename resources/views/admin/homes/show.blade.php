@@ -76,6 +76,19 @@
                 <span>Descrizione: </span>{{$home->description}}
             </p>
 
+            {{--? visualizzazioni & bottone per la sponsorizzazione --}}
+            <div class="view-ads">
+                <div class="view">
+                    <span>visualizzazioni: </span>
+
+                </div>
+                <div class="ads">
+                    <a href="{{ route('payment.form', $home->slug) }}" class="btn btn-primary">
+                        Compra Visibilità
+                    </a>
+                </div>
+            </div>
+
             <hr class="mt-4">
             {{--? messaggi da frontend: --}}
             <div class="row row-gap-3 my-4">
