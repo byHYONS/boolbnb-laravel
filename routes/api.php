@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\VisualController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,5 @@ Route::get('homes/search', [SearchController::class, 'search']);
 Route::apiResource('homes', HomeController::class);
 
 Route::get('services', [ServiceController::class, 'index']);
+
+Route::post('visuals', [VisualController::class, 'store']);

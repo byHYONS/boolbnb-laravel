@@ -9,6 +9,11 @@ class Visual extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'home_id',
+        'ip'
+    ];
+
     //? relazione molti a molti con HOMES:
     public function home()
     {
