@@ -90,7 +90,7 @@
                 
                 {{--? messaggio di avvenuto pagamento --}}
                 @if (session('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" id="messaggio">
                         {{ session('success') }}
                     </div>
                 @endif
@@ -119,3 +119,7 @@
     </div>
 
     @endsection
+   
+    <script src="{{ asset('js/timeout.js') }}"></script>
+    
+   
