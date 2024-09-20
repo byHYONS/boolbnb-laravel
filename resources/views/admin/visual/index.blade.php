@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="chart-container d-flex justify-content-center mt-5 w-75 h-50" data-visitors='@php echo json_encode($visitors); @endphp'>
+<h3 class="m-5">Statistiche visualizzazioni</h3>
+<div class="chart-container d-flex justify-content-center mt-5 w-50" data-visitors='@php echo json_encode($visitors); @endphp'>
     <canvas id="chart" class="w-75 h-50"></canvas>
 </div>
 

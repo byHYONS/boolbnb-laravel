@@ -48,11 +48,18 @@ function totVisuals(month, num) {
         data: {
             labels: month,
             datasets: [{
-                label: 'Visite',
+                label: "visits",
                 backgroundColor: '#00d9a6',
                 borderColor: '#00d9a6',
                 data: num
             }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
         }
     });
 };
