@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreHomeRequest;
 use App\Http\Requests\UpdateHomeRequest;
 use App\Models\Home;
+use Carbon\Carbon;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -106,8 +107,36 @@ class HomeController extends Controller
      */
     public function show(Home $home)
     {
-        $home->load('services');
-        return view('admin.homes.show', compact('home'));
+        // $home->load('services', 'ads');
+
+        //? Calcola il tempo rimanente per ogni sponsorizzazione attiva:
+        $sponsorships = [];
+        $now = Carbon::now();
+       
+        foreach ($home->ads as $ad) {
+            //? uso created_at come data di inizio:
+            $startDate = $ad->pivot->created_at; 
+
+            $durationInHours = (int) explode(':', $ad->duration)[0];
+            
+            //? durata:
+            $endDate = Carbon::parse($startDate)->addHours($durationInHours); 
+            
+            //? se ancora attiva, calcola il tempo rimanente:
+            if ($now->lessThan($endDate)) {
+                $remainingTime = $endDate->diffForHumans($now);
+                $sponsorships[] = [
+                    'ad_id' => $ad->id,
+                    'ad' => $ad->title,
+                    'remaining_time' => $remainingTime,
+                ];
+            }
+        }
+
+        // dump("Ad Duration: ", $ad->duration);
+        // dd($sponsorships);
+
+        return view('admin.homes.show', compact('home', 'sponsorships'));
     }
 
     /**

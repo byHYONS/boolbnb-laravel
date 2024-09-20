@@ -69,15 +69,17 @@
                         </li>
                         <li class="mb-3">
                             @forelse ($home->ads as $ad )
-                            
                             <p><span>tipo di sponsorizzata </span>{{$ad->title}}</p>
+                                @foreach ($sponsorships as $sponsorship)
+                                    @if ($sponsorship['ad_id'] == $ad->id)
+                                        <p><span>Tempo rimanente: </span>{{ $sponsorship['remaining_time'] }}</p>
+                                    @endif
+                                @endforeach
                             <p><span>data inizio </span>{{$ad->created_at->format('d/m/Y')}}</p>                               
                             @empty
                                 <p>Non ci sono sponsorizzate!</p>
                             @endforelse
                         </li>
-
-
                     </ul>
                 </div>
             </div>
@@ -128,7 +130,10 @@
     </div>
 
     @endsection
-   
-    <script src="{{ asset('js/timeout.js') }}"></script>
+
+   @section('scripts')
+   <script src="{{ asset('js/timeout.js') }}"></script>    
+   @endsection
+
     
    

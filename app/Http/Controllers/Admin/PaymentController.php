@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Home;
+use Carbon\Carbon;
 use App\Models\Ad;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -23,6 +24,25 @@ class PaymentController extends Controller
 
         //? Passa l'oggetto "home" alla vista del form di pagamento
         return view('admin.payments.form', compact('home'));
+    }
+
+
+    public function checkSponsorshipStatus(Home $home)
+    {
+        $now = Carbon::now();
+
+        foreach ($home->ads as $ad) {
+            $startDate = $ad->pivot->created_at; // Usa created_at come data di inizio
+            $endDate = Carbon::parse($startDate)->addHours($ad->duration); // Aggiungi la durata
+
+            if ($now->greaterThanOrEqualTo($endDate)) {
+                // Sponsorizzazione scaduta
+                echo "La sponsorizzazione per {$home->title} è scaduta.";
+            } else {
+                // Sponsorizzazione ancora attiva
+                echo "La sponsorizzazione per {$home->title} è ancora attiva.";
+            }
+        }
     }
 
 
