@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <h2>Compra Visibilità per {{ $home->title }}</h2>
-    <h2>Compra Visibilità per {{ $home->slug }}</h2>
 
     <form id="payment-form" action="{{route('payment.store', $home->slug)}}" method="POST">
         @csrf
@@ -47,10 +46,9 @@
         <!-- Drop-in di Braintree -->
         <div id="dropin-container" class="my-4"></div>
 
-        <button>paga</button>
-
-        {{-- <div id="dropin-container"></div>
-        <button id="submit-button" class="button button--small button--green">Paga</button> --}}
+        {{--? --}}
+        <div id="dropin-container"></div>
+        <button id="submit-button" class="button button--small button--green">Paga</button>
 
 
 
