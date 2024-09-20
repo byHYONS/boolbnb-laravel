@@ -61,6 +61,6 @@
 @endsection
 
 @section('scripts')
-<script src="https://js.braintreegateway.com/web/dropin/1.43.0/js/dropin.js">></script>
+<script src="https://js.braintreegateway.com/web/dropin/1.43.0/js/dropin.js"></script>
 <script src="{{ asset('js/braintree.js') }}"></script>
 @endsection
