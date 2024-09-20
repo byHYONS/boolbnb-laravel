@@ -34,6 +34,9 @@
                 @endforeach
             </ul>
         </div>
+        <div class="manage">
+            <a href="{{route('admin.visual.index')}}">Statistiche</a>
+        </div>
     </div>
 </div>
 @endsection

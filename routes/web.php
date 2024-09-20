@@ -37,24 +37,24 @@ Route::middleware('auth', 'verified')
     ->prefix('admin')
     ->group(function () {
 
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    //? Recources HOME:
-    Route::resource('homes', HomeController::class)
-    //* chiamo la rotta con lo slug e non con l'id:
-    ->parameters(['homes' => 'home:slug']);
+        //? Recources HOME:
+        Route::resource('homes', HomeController::class)
+            //* chiamo la rotta con lo slug e non con l'id:
+            ->parameters(['homes' => 'home:slug']);
 
-    //? Recources SERVICE:
-    Route::resource('services', ServiceController::class);
+        //? Recources SERVICE:
+        Route::resource('services', ServiceController::class);
 
-    //? Recources AD:
-    Route::resource('ads', AdController::class);
+        //? Recources AD:
+        Route::resource('ads', AdController::class);
 
-    //? Recources USER:
-    Route::resource('users', RegisteredUserController::class);
- 
-       
-});
+        //? Recources USER:
+        Route::resource('users', RegisteredUserController::class);
+
+        Route::get('visual', [VisualController::class, 'index'])->name('visual.index');
+    });
 
 
 //? rotta per chiamata API tomtom:
@@ -80,4 +80,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
