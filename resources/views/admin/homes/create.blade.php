@@ -3,16 +3,15 @@
 @section('content')
 <div class="container mt-5">
 
-    <h2>Affitta un appartamento</h2>
-
-    <div class="button-manage my-4">
+    
+    <div class="button-manage text-end my-5">
         {{--? bottone indietro --}}
         <div class="back">
             <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>
         </div>
-        <!-- <a href="{{route('admin.homes.index') }}"><button class="back">torna alla home</button></a> -->
     </div>
-
+    <h2 class="mb-4 color-text">Crea una casa:</h2>
+    
     <form action="{{route('admin.homes.store')}}" method="POST" enctype="multipart/form-data" class="m-3">
         @csrf
 
@@ -153,15 +152,16 @@
             @endif
         </div>
 
-        <div class="form-check mb-3">
+        <div class="form-check form-switch mt-4 mb-5">
             <input type="hidden" name="active" value="0">
-            <input class="form-check-input" type="checkbox" name="active" id="active" value="1">
-            <label class="form-check-label" for="active"> Visibile </label>
+            <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" value="1"
+            {{in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+            <label class="form-check-label" for="active">Annuncio On Line</label>
         </div>
 
+        {{--? bottone inserimento --}}
         <p><small>*</small> Questi campi sono richiesti</p>
-
-        <button class="effect mb-3 submit-checkbox" onclick="validateForm()" type="submit">Inserisci Casa</button>
+        <button class="effect mb-4 submit-checkbox" onclick="validateForm()" type="submit">Inserisci Casa</button>
 
     </form>
     @endsection

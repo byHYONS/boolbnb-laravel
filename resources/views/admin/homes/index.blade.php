@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="home-index">
-    <div class="container">
-        <div class="d-flex justify-content-between align-items-center mx-2">
-            <h2 class="my-4">Lista appartamenti</h2>
-            <div class="manage">
-                <div class="create my-4">
-                    <a href="{{route('admin.homes.create') }}">{{ __('Crea Nuovo')}}</a>
-                </div>
+<div class="home-index my-4">
+    <div class="container m-5">
+        <div class="manage">
+            {{--? bottone crea --}}
+            <div class="create my-5 text-end">
+                <a href="{{route('admin.homes.create') }}">{{ __('Crea Nuovo')}}</a>
             </div>
         </div>
+        <h2 class="my-5 color-text">Lista Case:</h2>
         <div class="row">
             <ul class="d-flex flex-wrap">
                 @foreach ($homes as $apartment)
@@ -34,7 +33,7 @@
                 @endforeach
             </ul>
         </div>
-        <div class="manage">
+        <div class="manage mt-4">
             <a href="{{route('admin.visual.index')}}">Statistiche</a>
         </div>
     </div>

@@ -3,13 +3,14 @@
 @section('content')
 
 <div class="container mt-5">
-    <h2>Aggiornamento dell'appartamento</h2>
-    <div class="button-manage my-4">
-        {{--? bottone indietro --}}
+    {{--? bottone indietro --}}
+    <div class="button-manage text-end mt-5">
         <div class="back">
             <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>
         </div>
     </div>
+
+    <h2 class="mb-4 color-text">Modifica la casa:</h2>
     <!-- Formulario di edizione -->
     <form action="{{ route('admin.homes.update', $home) }}" method="POST" enctype="multipart/form-data" class="mt-3">
         @method('PUT')
@@ -135,14 +136,16 @@
         <!-- Servizi -->
         <div class="form-group mb-3">
             <label for="services">Servizi <small>*</small></label>
-            <div class="d-flex">
+            <div class="d-flex flex-wrap">
                 @foreach ($services as $service)
-                <div class="form-check px-5">
-                    <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}"
-                        {{ in_array($service->id, $home->services->pluck('id')->toArray()) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="service{{ $service->id }}">
-                        {{ $service->name }}
-                    </label>
+                <div class="col-3">
+                    <div class="form-check px-5">
+                        <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}"
+                            {{ in_array($service->id, $home->services->pluck('id')->toArray()) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="service{{ $service->id }}">
+                            {{ $service->name }}
+                        </label>
+                    </div>
                 </div>
                 @endforeach
             </div>
@@ -171,18 +174,16 @@
             @endif
         </div>
 
-
-        <div class="form-check mb-3">
+        <div class="form-check form-switch mt-4 mb-5">
             <input type="hidden" name="active" value="0">
-            <input class="form-check-input" type="checkbox" name="active" id="active" value="1"
-                {{ old('active', $home->active) == 1 ? 'checked' : '' }}>
-
-            <label class="form-check-label" for="active"> Visibile </label>
+            <input class="form-check-input" type="checkbox" role="switch" id="active" name="active" value="1"
+            {{ old('active', $home->active) == 1 ? 'checked' : '' }}>
+            <label class="form-check-label" for="active">Annuncio On Line</label>
         </div>
 
-
-        <!-- Aggiornamento -->
-        <button class="effect mb-3 submit-checkbox" onclick="validateForm()" type="submit">Modifica Casa</button>
+        {{--? bottone modifica --}}
+        <p><small>*</small> Questi campi sono richiesti</p>
+        <button class="effect mb-5 submit-checkbox" onclick="validateForm()" type="submit">Modifica Casa</button>
     </form>
 
     @endsection
