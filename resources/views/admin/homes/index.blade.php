@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="home-index my-4">
-    <div class="container m-5">
+    <div class="container m-5 m-auto">
         <div class="manage">
             {{--? bottone crea --}}
             <div class="create my-5 text-end">

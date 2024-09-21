@@ -91,11 +91,17 @@
             <div class="view-ads">
                 <div class="view mt-4">
                     <p>
-                        <span>visualizzazioni: </span>
+                        <span class="fs-4">visualizzazioni: </span>
+                        @forelse ($home->visuals as $count)
+                        {{$count->count()}}                           
+                        @empty
+                        Il tuo annuncio non ha visualizzavioni
+                        <p><span class="fs-4">Metti in evidenza la tua casa!</span></p>
+                        @endforelse
 
                     </p>
                 </div>
-                <div class="ads button-manage text-end my-5">
+                <div class="ads button-manage text-end my-4">
                     <div class="back">
                         <a href="{{ route('payment.form', $home->slug) }}">
                             Compra Visibilità
