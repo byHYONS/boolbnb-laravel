@@ -16,7 +16,7 @@
                     <a href="{{route('admin.homes.create') }}">{{ __('Crea Nuovo')}}</a>
                 </div>
                 <a href="{{route('admin.homes.edit', $home)}}" class="ml-45 mr-10">
-                    <i class="fas fa-pen"></i>
+                    <i class="fas fa-pen orange"></i>
                 </a>
                 <form action="{{route('admin.homes.destroy', $home)}}" method="POST">
                     @csrf
@@ -89,19 +89,23 @@
 
             {{--? visualizzazioni & bottone per la sponsorizzazione --}}
             <div class="view-ads">
-                <div class="view">
-                    <span>visualizzazioni: </span>
+                <div class="view mt-4">
+                    <p>
+                        <span>visualizzazioni: </span>
 
+                    </p>
                 </div>
-                <div class="ads">
-                    <a href="{{ route('payment.form', $home->slug) }}" class="btn btn-primary">
-                        Compra Visibilità
-                    </a>
+                <div class="ads button-manage text-end my-5">
+                    <div class="back">
+                        <a href="{{ route('payment.form', $home->slug) }}">
+                            Compra Visibilità
+                        </a>
+                    </div>
                 </div>
-                
+
                 {{--? messaggio di avvenuto pagamento --}}
                 @if (session('success'))
-                    <div class="alert alert-success" id="messaggio">
+                    <div class="alert alert-success my-3" id="messaggio">
                         {{ session('success') }}
                     </div>
                 @endif

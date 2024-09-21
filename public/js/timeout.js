@@ -1,11 +1,4 @@
 
-
-    // setTimeout(function(){
-    //     document.getElementById('messaggio').style.display="none";
-    // }, 3000);
-
-
-
     // Esegui la funzione dopo 5 secondi (5000 millisecondi)
     setTimeout(function() {
         let flashMessage = document.getElementById('messaggio');
@@ -18,5 +11,5 @@
                 flashMessage.remove();
             }, 1000); // Aspetta che l'animazione finisca (1s)
         }
-    }, 3000); // Nasconde il messaggio dopo 5 secondi
+    }, 8000); // Nasconde il messaggio dopo 5 secondi
 

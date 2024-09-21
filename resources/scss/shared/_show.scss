@@ -16,7 +16,9 @@
 
             .back {
                 
+                button,
                 a {
+                    border: none;
                     padding: 8px 20px;
                     border-radius: 12px;
                     background: $gradient;
@@ -51,6 +53,7 @@
                 a {
                     all: unset;
                     
+                    .orange,
                     .fa-pen {
                         margin-right: 10px;
                         padding: 10px;
