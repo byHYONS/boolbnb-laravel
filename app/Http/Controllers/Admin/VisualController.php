@@ -19,8 +19,7 @@ class VisualController extends Controller
             array_push($homeId, $home['id']);
         }
 
-        $visitors = Visual::whereIn('home_id', $homeId)->get();
-
+        $visitors = Visual::whereIn('home_id', $homeId)->with('home')->get();
 
         return view('admin.visual.index', compact('visitors'));
     }

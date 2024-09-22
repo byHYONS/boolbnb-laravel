@@ -2,6 +2,7 @@ const visitorsContainer = document.querySelector('.chart-container');
 const visitorsData = visitorsContainer.getAttribute('data-visitors');
 
 const visitors = JSON.parse(visitorsData);
+console.log(visitors)
 
 const visuals = {
     'January': 0,
@@ -40,7 +41,7 @@ function results(visuals) {
     totVisuals(month, num);
 }
 
-// Grafico
+// Grafico visualizzazioni totali
 function totVisuals(month, num) {
     const grafico = document.getElementById('chart');
     let chart = new Chart(grafico, {
@@ -48,7 +49,7 @@ function totVisuals(month, num) {
         data: {
             labels: month,
             datasets: [{
-                label: "visits",
+                label: "Visite mensili",
                 backgroundColor: '#00d9a6',
                 borderColor: '#00d9a6',
                 data: num
@@ -56,10 +57,72 @@ function totVisuals(month, num) {
         },
         options: {
             plugins: {
-                legend: {
-                    display: false
+                legend: { display: true }
+            },
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Visualizzazioni'
+                    }, beginAtZero: true
                 }
             }
         }
     });
 };
+
+
+function countVisualsByApartment(visitors) {
+    const apartmentVisuals = {};
+
+    visitors.forEach(visitor => {
+        const apartmentTitle = visitor.home.title;
+        if (apartmentVisuals[apartmentTitle]) {
+            apartmentVisuals[apartmentTitle] += 1;
+        } else {
+            apartmentVisuals[apartmentTitle] = 1;
+        }
+    });
+
+    return apartmentVisuals;
+}
+
+const visualCounts = countVisualsByApartment(visitors);
+console.log(visualCounts)
+
+const apartmentNames = Object.keys(visualCounts);
+console.log(apartmentNames)
+const visualizations = Object.values(visualCounts);
+console.log(visualizations)
+
+apartmentVisuals(apartmentNames, visualizations);
+
+// Grafico visualizzazioni per appartamento
+function apartmentVisuals(apartmentNames, visualizations) {
+    const grafico = document.getElementById('chart-apartments');
+    let chart_apartments = new Chart(grafico, {
+        type: 'bar',
+        data: {
+            labels: apartmentNames,
+            datasets: [{
+                label: "Visite per appartamento",
+                backgroundColor: '#00d9a6',
+                borderColor: '#00d9a6',
+                data: visualizations
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Visualizzazioni'
+                    }, beginAtZero: true
+                }
+            }
+        }
+    });
+}
