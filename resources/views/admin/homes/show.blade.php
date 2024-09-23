@@ -70,14 +70,14 @@
                         <li class="mb-3">
                             @forelse ($home->ads as $ad )
                             <p><span>tipo di sponsorizzata </span>{{$ad->title}}</p>
-                                @foreach ($sponsorships as $sponsorship)
-                                    @if ($sponsorship['ad_id'] == $ad->id)
-                                        <p><span>Tempo rimanente: </span>{{ $sponsorship['remaining_time'] }}</p>
-                                    @endif
-                                @endforeach
-                            <p><span>data inizio </span>{{$ad->created_at->format('d/m/Y')}}</p>                               
+                            @foreach ($sponsorships as $sponsorship)
+                            @if ($sponsorship['ad_id'] == $ad->id)
+                            <p><span>Tempo rimanente: </span>{{ $sponsorship['remaining_time'] }}</p>
+                            @endif
+                            @endforeach
+                            <p><span>data inizio </span>{{$ad->created_at->format('d/m/Y')}}</p>
                             @empty
-                                <p>Non ci sono sponsorizzate!</p>
+                            <p>Non ci sono sponsorizzate!</p>
                             @endforelse
                         </li>
                     </ul>
@@ -92,12 +92,12 @@
                 <div class="view mt-4">
                     <p>
                         <span class="fs-4">visualizzazioni: </span>
-                        @forelse ($home->visuals as $count)
-                        {{$count->count()}}                           
-                        @empty
-                        Il tuo annuncio non ha visualizzavioni
-                        <p><span class="fs-4">Metti in evidenza la tua casa!</span></p>
-                        @endforelse
+                        @if ($home->visuals()->count() > 0)
+                        {{$home->visuals()->count()}}
+                        @else
+                        Il tuo annuncio non ha visualizzazioni
+                    <p><span class="fs-4">Metti in evidenza la tua casa!</span></p>
+                    @endif
 
                     </p>
                 </div>
@@ -111,9 +111,9 @@
 
                 {{--? messaggio di avvenuto pagamento --}}
                 @if (session('success'))
-                    <div class="alert alert-success my-3" id="messaggio">
-                        {{ session('success') }}
-                    </div>
+                <div class="alert alert-success my-3" id="messaggio">
+                    {{ session('success') }}
+                </div>
                 @endif
             </div>
 
@@ -141,9 +141,6 @@
 
     @endsection
 
-   @section('scripts')
-   <script src="{{ asset('js/timeout.js') }}"></script>    
-   @endsection
-
-    
-   
+    @section('scripts')
+    <script src="{{ asset('js/timeout.js') }}"></script>
+    @endsection
