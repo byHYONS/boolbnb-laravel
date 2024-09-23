@@ -64,6 +64,7 @@
             </div>
             <div class="button-manage">
                 <div class="back">
+                    <div id="error-message" class="alert alert-danger mb-3" style="display: none"></div>
                     <button id="submit-button" type="button">Procedi con il pagamento</button>
                 </div>
 

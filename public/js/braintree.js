@@ -73,22 +73,10 @@
 
 
 // //? demo:
-// const button = document.querySelector('#submit-button');
-
-// braintree.dropin.create({
-//   authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-//   selector: '#dropin-container'
-// }, function (err, instance) {
-//   button.addEventListener('click', function () {
-//     instance.requestPaymentMethod(function (err, payload) {
-//       // Submit payload.nonce to your server
-//     });
-//   })
-// });
-
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.querySelector('#payment-form');
   const submitButton = document.querySelector('#submit-button');
+  const errorMessageDiv = document.querySelector('#error-message'); // Div per gli errori
 
   // Creazione del drop-in di Braintree
   braintree.dropin.create({
@@ -104,13 +92,17 @@ document.addEventListener('DOMContentLoaded', function () {
       submitButton.addEventListener('click', function (event) {
           event.preventDefault();
 
+          // Nascondi eventuali messaggi di errore precedenti
+          errorMessageDiv.style.display = 'none';
+          errorMessageDiv.textContent = '';
+
           // Richiede il metodo di pagamento
           instance.requestPaymentMethod(function (err, payload) {
               if (err) {
+                  // Mostra l'errore sulla pagina invece di usare alert
+                  errorMessageDiv.style.display = 'block';
+                  errorMessageDiv.textContent = 'Errore nei dati della carta. Per favore, verifica i dati inseriti.';
                   console.error('Errore nel metodo di pagamento:', err);
-
-                  //todo: levare sto schifo
-                  alert('Errore nei dati della carta. Per favore, verifica i dati inseriti.');
                   return; // Blocca l'invio del form
               }
 
