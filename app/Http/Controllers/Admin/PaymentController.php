@@ -17,7 +17,6 @@ class PaymentController extends Controller
     {
         //? Trova la casa in base allo slug
         $home = Home::where('slug', $slug)->first();
-
         if (!$home) {
             return redirect()->back()->withErrors(['error' => 'Casa non trovata']);
         }

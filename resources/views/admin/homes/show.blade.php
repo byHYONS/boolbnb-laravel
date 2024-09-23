@@ -71,7 +71,7 @@
                             @if ($home->ads->first())
                             <p><span>tipo di sponsorizzata: </span>{{$home->ads->first()->title}}</p>
                             <p><span>data inizio </span>{{$home->ads->first()->created_at->format('d/m/Y')}}</p>
-                            <p><span>Tempo rimanente: </span>{{$activeSponsorship['remaining_time']}}</p>
+                            <p><span>Tempo rimanente: </span>{{ $activeSponsorship['remaining_time']?? 'Non Attiva' }}</p>
                             @else
                             <p>Non ci sono sponsorizzate!</p>   
                             @endif   
@@ -91,19 +91,21 @@
                         @if ($home->visuals()->count() > 0)
                         {{$home->visuals()->count()}}
                         @else
-                        Il tuo annuncio non ha visualizzazioni
-                    <p><span class="fs-4">Metti in evidenza la tua casa!</span></p>
-                    @endif
+                        Il tuo annuncio non ha visualizzazioni                      
+                        @endif
 
                     </p>
                 </div>
-                <div class="ads button-manage text-end my-4">
+                @if (!$activeSponsorship)
+                <div class="ads button-manage my-4 d-block"">
+                    <p><span class="fs-4 d-block mb-4">Metti in evidenza la tua casa!</span></p>
                     <div class="back">
                         <a href="{{ route('payment.form', $home->slug) }}">
                             Compra Visibilità
                         </a>
                     </div>
                 </div>
+                @endif
 
                 {{--? messaggio di avvenuto pagamento --}}
                 @if (session('success'))

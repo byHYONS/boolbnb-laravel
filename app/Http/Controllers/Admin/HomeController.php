@@ -112,6 +112,8 @@ class HomeController extends Controller
         //? Calcola il tempo rimanente per ogni sponsorizzazione attiva:
         $sponsorships = [];
         $now = Carbon::now();
+        $activeSponsorship = null;
+
        
         foreach ($home->ads as $ad) {
             //? uso created_at come data di inizio:
@@ -123,6 +125,7 @@ class HomeController extends Controller
             $endDate = Carbon::parse($startDate)->addHours($durationInHours); 
             
             //? se ancora attiva, calcola il tempo rimanente:
+
             if ($now->lessThan($endDate)) {
                 $remainingTime = $endDate->diffForHumans($now);
                 $sponsorships[] = [
@@ -139,6 +142,8 @@ class HomeController extends Controller
         $activeSponsorship = collect($sponsorships)->first(function ($sponsorship) use ($home) {
             return $sponsorship['ad_id'] == $home->ads->first()->id;
         });
+
+        
 
 
         return view('admin.homes.show', compact('home', 'activeSponsorship'));

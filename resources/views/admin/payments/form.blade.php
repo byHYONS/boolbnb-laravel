@@ -64,7 +64,7 @@
             </div>
             <div class="button-manage">
                 <div class="back">
-                    <button id="submit-button">Procedi con il pagamento</button>
+                    <button id="submit-button" type="button">Procedi con il pagamento</button>
                 </div>
 
             </div>
