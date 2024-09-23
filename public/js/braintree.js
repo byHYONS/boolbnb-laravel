@@ -103,7 +103,12 @@ document.addEventListener('DOMContentLoaded', function () {
                   errorMessageDiv.style.display = 'block';
                   errorMessageDiv.textContent = 'Errore nei dati della carta. Per favore, verifica i dati inseriti.';
                   console.error('Errore nel metodo di pagamento:', err);
-                  return; // Blocca l'invio del form
+
+                  setTimeout(function() {
+                    errorMessageDiv.style.transition = 'opacity 1s ease';
+                    errorMessageDiv.style.opacity = '0';
+                }, 3000); // 3000 millisecondi = 3 secondi
+                   // Blocca l'invio del form
               }
 
               // Se il pagamento è valido, invia il form
