@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="home-index my-4">
+<div class="home-index mt-4">
     <div class="container m-5 m-auto">
         <div class="manage">
             {{--? bottone crea --}}
@@ -11,7 +11,7 @@
         </div>
         <h2 class="my-5 color-text">Lista Case:</h2>
         <div class="row">
-            <ul class="d-flex flex-wrap">
+            <ul class="d-flex flex-wrap mb-0">
                 @foreach ($homes as $apartment)
                 <li class="col-3">
                     <div class="mx-2 my-3">
@@ -33,7 +33,7 @@
                 @endforeach
             </ul>
         </div>
-        <div class="manage mt-4">
+        <div class="manage mt-4 mb-5">
             <a href="{{route('admin.visual.index')}}">Statistiche</a>
         </div>
     </div>
