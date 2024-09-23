@@ -68,17 +68,13 @@
                             @endforelse
                         </li>
                         <li class="mb-3">
-                            @forelse ($home->ads as $ad )
-                            <p><span>tipo di sponsorizzata </span>{{$ad->title}}</p>
-                            @foreach ($sponsorships as $sponsorship)
-                            @if ($sponsorship['ad_id'] == $ad->id)
-                            <p><span>Tempo rimanente: </span>{{ $sponsorship['remaining_time'] }}</p>
-                            @endif
-                            @endforeach
-                            <p><span>data inizio </span>{{$ad->created_at->format('d/m/Y')}}</p>
-                            @empty
-                            <p>Non ci sono sponsorizzate!</p>
-                            @endforelse
+                            @if ($home->ads->first())
+                            <p><span>tipo di sponsorizzata: </span>{{$home->ads->first()->title}}</p>
+                            <p><span>data inizio </span>{{$home->ads->first()->created_at->format('d/m/Y')}}</p>
+                            <p><span>Tempo rimanente: </span>{{$activeSponsorship['remaining_time']}}</p>
+                            @else
+                            <p>Non ci sono sponsorizzate!</p>   
+                            @endif   
                         </li>
                     </ul>
                 </div>

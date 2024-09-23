@@ -135,8 +135,13 @@ class HomeController extends Controller
 
         // dump("Ad Duration: ", $ad->duration);
         // dd($sponsorships);
+        // Seleziona solo la prima sponsorizzazione attiva
+        $activeSponsorship = collect($sponsorships)->first(function ($sponsorship) use ($home) {
+            return $sponsorship['ad_id'] == $home->ads->first()->id;
+        });
 
-        return view('admin.homes.show', compact('home', 'sponsorships'));
+
+        return view('admin.homes.show', compact('home', 'activeSponsorship'));
     }
 
     /**

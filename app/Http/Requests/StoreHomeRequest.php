@@ -28,7 +28,7 @@ class StoreHomeRequest extends FormRequest
             'bathrooms' => 'required|integer',
             'rooms' => 'required|integer',
             'square_metres' => 'required|integer|min:10',
-            'address' => 'required|string|min:10|max:75',
+            'address' => 'required|string|min:3|max:75',
             'image' => 'required|image|max:2048',
             'active' => 'required',
             'services' => 'nullable|exists:services,id'
@@ -57,7 +57,7 @@ class StoreHomeRequest extends FormRequest
             'square_metres.min' => 'I metri quadrati devono essere almeno 10',
             'address.required' => 'L\'indirizzo è obbligatorio',
             'address.string' => 'L\'indirizzo deve essere una stringa',
-            'address.min' => 'L\'indirizzo deve contenere almeno 10 caratteri',
+            'address.min' => 'L\'indirizzo deve contenere almeno 3 caratteri',
             'address.max' => 'L\'indirizzo può contenere al massimo 75 caratteri',
             'image.required' => 'L\'immagine è obbligatoria',
             'image.image' => 'Il file deve essere un\'immagine',
