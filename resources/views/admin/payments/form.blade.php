@@ -63,7 +63,7 @@
             <div id="dropin-container" class="card no-hover p-4 my-4"></div>
     
             {{--? MODALE BREINTREE--}}
-            <div id="dropin-container" class="">
+            <div id="dropin-container">
                 {{--? apre modale --}}
             </div>
             <div class="button-manage">
