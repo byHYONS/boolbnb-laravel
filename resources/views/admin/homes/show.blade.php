@@ -28,7 +28,7 @@
         </div>
 
         {{--? dettaglio informazioni --}}
-        <div class="card p-5">
+        <div class="card no-hover p-5">
             <h2>{{$home->title}}</h2>
             <hr class="mb-5">
 

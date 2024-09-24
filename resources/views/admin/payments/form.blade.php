@@ -40,14 +40,14 @@
                                 </li>
                                 <!-- Descrizione dei vantaggi -->
                                 @if ($ad['title'] == 'platinum')
-                                <li>Massima priorità nei risultati di ricerca</li>
-                                <li>Visibilità garantita su tutte le pagine principali</li>
+                                <li><span><i class="fas fa-check color-text"></i> </span>Massima priorità nei risultati di ricerca</li>
+                                <li><span><i class="fas fa-check color-text"></i> </span>Visibilità garantita su tutte le pagine principali</li>
                                 @elseif ($ad['title'] == 'gold')
-                                <li>Alta priorità nei risultati di ricerca</li>
-                                <li>Visibilità in primo piano su determinate pagine</li>
+                                <li><span><i class="fas fa-check color-text"></i> </span>Alta priorità nei risultati di ricerca</li>
+                                <li><span><i class="fas fa-check color-text"></i> </span>Visibilità in primo piano su determinate pagine</li>
                                 @elseif ($ad['title'] == 'silver')
-                                <li>Priorità nei risultati di ricerca</li>
-                                <li>Visibilità su alcune pagine principali</li>
+                                <li><span><i class="fas fa-check color-text"></i> </span>Priorità nei risultati di ricerca</li>
+                                <li><span><i class="fas fa-check color-text"></i> </span>Visibilità su alcune pagine principali</li>
                                 @endif
                             </ul>
                         </div>
@@ -60,10 +60,10 @@
             <input type="hidden" id="home-slug" name="home_slug" value="{{ $home->slug }}">
     
             <!-- Drop-in di Braintree -->
-            <div id="dropin-container" class="my-4"></div>
+            <div id="dropin-container" class="card no-hover p-4 my-4"></div>
     
             {{--? MODALE BREINTREE--}}
-            <div id="dropin-container">
+            <div id="dropin-container" class="">
                 {{--? apre modale --}}
             </div>
             <div class="button-manage">

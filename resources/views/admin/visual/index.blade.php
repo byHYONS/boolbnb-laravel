@@ -1,14 +1,17 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container">
-    <h3 class="my-5">Statistiche visualizzazioni</h3>
-    <div class="row">
-        <div class="chart-container d-flex mt-5 w-50" data-visitors='@php echo json_encode($visitors); @endphp'>
-            <canvas id="chart" class="me-4"></canvas>
-            <canvas id="chart-apartments" class="ms-4"></canvas>
+<div class="home-show">
+    <div class="container">
+        <h3 class="my-5">Statistiche visualizzazioni</h3>
+        <div class="row card no-hover p-5">
+            <div class="chart-container d-flex mt-5 w-50" data-visitors='@php echo json_encode($visitors); @endphp'>
+                <canvas id="chart" class="me-4"></canvas>
+                <canvas id="chart-apartments" class="ms-4"></canvas>
+            </div>
         </div>
     </div>
+
 </div>
 
 @endsection

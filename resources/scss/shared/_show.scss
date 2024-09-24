@@ -135,8 +135,6 @@
                 opacity: .8;
             }
 
-
-
             .card-header {
                 
                 background: $gradient2;
@@ -209,6 +207,9 @@
                     text-decoration: underline;
                 }
             }
+        }
+        .no-hover:hover {
+            box-shadow: 1px 5px 10px rgba($shadow , $alpha);
         }
 
     }
