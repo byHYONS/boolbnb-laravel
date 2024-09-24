@@ -96,7 +96,13 @@ document.addEventListener('DOMContentLoaded', function () {
           errorMessageDiv.style.display = 'none';
           errorMessageDiv.textContent = '';
 
-          // Richiede il metodo di pagamento
+          const selectedSponsorship = document.querySelector('input[name="sponsorship"]:checked');
+          if (!selectedSponsorship) {
+              errorMessageDiv.style.display = 'block';
+              errorMessageDiv.textContent = 'Seleziona un\'opzione di sponsorizzazione (platinum, gold o silver).';
+              return; 
+          }
+
           instance.requestPaymentMethod(function (err, payload) {
               if (err) {
                   // Mostra l'errore sulla pagina invece di usare alert
@@ -107,19 +113,17 @@ document.addEventListener('DOMContentLoaded', function () {
                   setTimeout(function() {
                     errorMessageDiv.style.transition = 'opacity 1s ease';
                     errorMessageDiv.style.opacity = '0';
-                }, 3000); // 3000 millisecondi = 3 secondi
-                   // Blocca l'invio del form
+                  }, 3000); 
+                  
+                  return; 
               }
 
-              // Se il pagamento è valido, invia il form
-              // Aggiungi il nonce al form e invia i dati al server
               const hiddenNonceInput = document.createElement('input');
               hiddenNonceInput.type = 'hidden';
               hiddenNonceInput.name = 'payment_method_nonce';
               hiddenNonceInput.value = payload.nonce;
               form.appendChild(hiddenNonceInput);
 
-              // Ora invia il form
               form.submit();
           });
       });
