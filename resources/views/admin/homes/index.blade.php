@@ -13,7 +13,7 @@
         <div class="row">
             <ul class="d-flex flex-wrap mb-0">
                 @foreach ($homes as $apartment)
-                <li class="col-3">
+                <li class="col-lg-3 col-md-4 col-sm-6 col-12">
                     <div class="mx-2 my-3">
                         {{--? link diretto su foto --}}
                         <a href="{{ route('admin.homes.show', $apartment)}}">
