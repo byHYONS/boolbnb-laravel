@@ -16,7 +16,7 @@
             <div class="px-5 pt-4 bg-btn">
                 <h2 class="mb-4 color-text2">Modifica la casa<small>:</small></h2>
             </div>
-            <div class="card-body pb-4 px-5">
+            <div class="pb-4 px-5">
                 <!-- Formulario di edizione -->
                 <form action="{{ route('admin.homes.update', $home) }}" method="POST" enctype="multipart/form-data" class="mt-4">
                     @method('PUT')
