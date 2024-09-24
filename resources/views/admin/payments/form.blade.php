@@ -20,10 +20,14 @@
                 @foreach(config('ads') as $ad)
                 <div class="col-md-4">
                     <div class="card h-100">
-                        <div class="card-header bg-btn color-text2 fw-bolder">
-                            <!-- Radio button per selezionare il tipo di sponsorizzazione -->
-                            <input type="radio" id="ad_{{ $ad['id'] }}" name="sponsorship" value="{{ $ad['id'] }}" required>
-                            <label class="ms-3" for="ad_{{ $ad['id'] }}">{{ ucfirst($ad['title']) }} Sponsorizzazione</label>
+                        <!-- Radio button per selezionare il tipo di sponsorizzazione -->
+                        <input type="radio" id="ad_{{ $ad['id'] }}" name="sponsorship" value="{{ $ad['id'] }}" required>
+                        <label for="ad_{{ $ad['id'] }}">
+                            <div class="card-header fw-bolder">
+                                
+                                <span class="ms-3"> {{ ucfirst($ad['title']) }} Sponsorizzazione</span>
+
+                            </label>
                         </div>
                         <div class="card-body">
                             <!-- Durata e prezzo della sponsorizzazione -->

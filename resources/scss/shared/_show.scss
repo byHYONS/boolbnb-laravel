@@ -126,7 +126,32 @@
 
         .card {
             border-radius: 15px;
+            overflow: hidden;
             @extend %shadow;
+            &:hover {
+                @extend %shadow2;
+            }
+            &:active {
+                opacity: .8;
+            }
+
+
+
+            .card-header {
+                
+                background: $gradient2;
+                color: $primary;
+                transition: 0.3s ease;
+            }
+            
+            input[type="radio"] {
+                display: none; /* Nascondi il radio button */
+            }
+            
+            input[type="radio"]:checked + label .card-header {
+                background: $gradient;
+                color: #fff; 
+            }
 
             .crd {
                 padding: 35px 0 60px;
