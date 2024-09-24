@@ -1,14 +1,26 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="home-show">
+<div class="home-show p-5">
     <div class="container">
-        <h3 class="my-5">Statistiche visualizzazioni</h3>
-        <div class="row card no-hover p-5">
-            <div class="chart-container d-flex mt-5 w-50" data-visitors='@php echo json_encode($visitors); @endphp'>
-                <canvas id="chart" class="me-4"></canvas>
-                <canvas id="chart-apartments" class="ms-4"></canvas>
+        <div class="button-menage">
+            {{--? bottone indietro --}}
+            <div class="back mb-5">
+                <a href="{{route('admin.homes.index') }}">{{ __('Indietro')}}</a>
             </div>
+        </div>
+        <div class="card no-hover mb-5">
+            <div class="bg-btn pt-4 px-5">
+                <h3 class="mb-4 color-text2">Statistiche visualizzazioni<small>:</small></h3>
+            </div>
+            <div class="pb-4 px-5">
+                <div class="row p-5">
+                    <div class="chart-container d-flex mt-5 w-50" data-visitors='@php echo json_encode($visitors); @endphp'>
+                        <canvas id="chart" class="me-4"></canvas>
+                        <canvas id="chart-apartments" class="ms-4"></canvas>
+                    </div>
+                </div>
+            </div>           
         </div>
     </div>
 
