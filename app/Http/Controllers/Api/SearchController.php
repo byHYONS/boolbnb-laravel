@@ -64,31 +64,38 @@ class SearchController extends Controller
 
         //* T_Distance_Sphere:
         $homes = Home::selectRaw("
-            *, ST_Distance_Sphere(
-                POINT(`long`, `lat`),  -- Il punto lat/long del record nella tabella `homes`
-                POINT(?, ?)            -- Le coordinate di latitudine e longitudine dell'utente
-            ) AS distance
-        ", [$longitude, $latitude])  // Sostituisci i valori con quelli delle variabili dell'utente
-            ->having('distance', '<=', $distance)
-            ->orderBy('distance')
-            //? icluiamo nei risultati le relazioni:
-            ->with('services', 'user', 'ads')
-            ->limit(12)
-            ->get();
+            homes.*, 
+            ST_Distance_Sphere(
+                POINT(homes.long, homes.lat),  -- Il punto lat/long del record nella tabella `homes`
+                POINT(?, ?)                    -- Le coordinate di latitudine e longitudine dell'utente
+            ) AS distance,
+            (CASE 
+                WHEN ad_home.home_id IS NOT NULL THEN 1  -- Verifica se l'appartamento è sponsorizzato
+                ELSE 0
+            END) AS is_sponsored
+        ", [$longitude, $latitude])
+        ->leftJoin('ad_home', 'homes.id', '=', 'ad_home.home_id')  // Verifica se esiste una sponsorizzazione
+        ->having('distance', '<=', $distance)
+        ->orderBy('is_sponsored', 'DESC')  // Prima gli appartamenti sponsorizzati
+        ->orderBy('distance')  // Poi ordina per distanza
+        ->with('services', 'user')  // Includi le relazioni con servizi e utenti
+        ->limit(12)
+        ->get();
 
-
+        // Se non ci sono risultati:
         if ($homes->isEmpty()) {
             return response()->json([
                 'status' => 'success',
                 'results' => [],
-                // 'message' => 'Nessuna casa trovata entro ' . $distance . ' km da ' . $city . '.',
             ]);
         }
 
+        // Restituisci i risultati:
         return response()->json([
             'status' => 'success',
             'results' => $homes,
         ]);
+
     }
 
     //* metodo per la chiamata API tomtom:
