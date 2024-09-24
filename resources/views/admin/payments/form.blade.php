@@ -29,7 +29,7 @@
                             <!-- Durata e prezzo della sponsorizzazione -->
                             <ul>
                                 <li>
-                                    <p><span> Durata: </span>{{ $ad['duration'] }} ore</p>
+                                    <p><span> Durata: </span> {{ explode(':', $ad['duration'])[0] }} ore</p>
                                 </li>
                                 <li>
                                     <p><span>Prezzo: </span> € {{ $ad['price'] }} </p>                                       
