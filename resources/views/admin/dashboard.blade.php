@@ -3,7 +3,7 @@
 @section('content')
 <div class="dashboard">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" id="houdini">
             <div class="col mt-4">
                 <div class="form">
                     <div class="form-header">{{ __('Dashboard') }}</div>
@@ -35,4 +35,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="{{ asset('js/visuals.js') }}"></script>
+<script src="{{ asset('js/timeout.js') }}"></script>
 @endsection
