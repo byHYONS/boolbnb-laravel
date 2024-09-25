@@ -79,6 +79,7 @@ class HomeController extends Controller
                'total' => $allHomes->count(),
                'current_page' => $currentPage,
                'per_page' => $perPage,
+               'ads_active' => $sponsoredHomes,
            ]
        ]);
     }
