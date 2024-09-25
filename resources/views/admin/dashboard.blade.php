@@ -55,14 +55,6 @@
                             </div>
                         </div>
                         @endforelse
-
-                        <h4 class="color-text my-4">Le tue sponsorizzate:</h4>
-                        @if ($home->ads->first())
-                            <p class="col-6"><span><i class="fas fa-circle"></i></span>Annuncio {{$home->ads->first()->title}}</p>
-                            <p class="col-6"><span><i class="fas fa-circle"></i></span>{{ $activeSponsorship['remaining_time']?? 'Non Attiva' }}</p>
-                        @else
-                            <p class="mt-3">Non ci sono sponsorizzate!</p>   
-                        @endif   
                     </div>
                 </div>
             </div>
