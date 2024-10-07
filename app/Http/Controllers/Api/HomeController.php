@@ -121,6 +121,7 @@ class HomeController extends Controller
             $message->name = $data['name'];
             $message->email = $data['email'];
             $message->content = $data['content'];
+            $message->home_id = $home->id;
 
             $message->save();
 
@@ -147,3 +148,6 @@ class HomeController extends Controller
         }
     }
 }
+
+
+
