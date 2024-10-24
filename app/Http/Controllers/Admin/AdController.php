@@ -15,6 +15,7 @@ class AdController extends Controller
     public function index()
     {
         //
+        // esempio per commit
     }
 
     /**
