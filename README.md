@@ -177,5 +177,51 @@ Route::get('/', [PageController::class, 'index']);
 php artisan make:model NomeModel
 ```
 
+## Sviluppo con Neovim e GitHub Copilot Chat
+
+Questo progetto include una configurazione ottimizzata di Neovim con supporto per GitHub Copilot Chat, specificamente configurata per lo sviluppo Laravel.
+
+### Funzionalità Incluse
+
+- 🤖 **GitHub Copilot Chat** - Assistente AI conversazionale integrato
+- 🔍 **LSP Support** - Language Server per PHP, HTML, CSS, JavaScript
+- 🎨 **Syntax Highlighting** - Evidenziazione sintassi avanzata per Blade, PHP, ecc.
+- ⚡ **Laravel-Specific Prompts** - Prompts pre-configurati per Laravel
+- 📁 **File Navigation** - Ricerca e navigazione file veloce
+- 🧪 **Testing Integration** - Integrazione con PHPUnit
+
+### Installazione Rapida
+
+1. **Installa automaticamente:**
+   ```bash
+   ./.nvim/install.sh
+   ```
+
+2. **Oppure installa manualmente:**
+   ```bash
+   cp .nvim/init.lua ~/.config/nvim/init.lua
+   ```
+
+3. **Avvia Neovim e configura Copilot:**
+   ```bash
+   nvim
+   :Copilot setup
+   ```
+
+### Comandi Principali
+
+- `<Space>cc` - Apri Copilot Chat
+- `<Space>ce` - Spiega codice selezionato
+- `<Space>cf` - Correggi codice selezionato
+- `<Space>ct` - Genera test per codice selezionato
+- `<Space>la` - Esegui comando artisan
+- `<Space>lt` - Esegui test PHPUnit
+
+### Documentazione Completa
+
+Per istruzioni dettagliate e risoluzione problemi, consulta:
+```bash
+cat .nvim/README.md
+```
 
 ##### © byHYONS™
